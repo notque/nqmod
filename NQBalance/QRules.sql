@@ -64,7 +64,7 @@ UPDATE Units SET CostProgressionParam1 = CostProgressionParam1*2 where UnitType 
 UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'PROJECT_COMPLETION_GRANT_CULTURE_BASED_ON_SCIENCE_RATE' and Name = 'Multiplier'; -- Was 10
  
  --Cities still hurt after being taken. Need to heal
-UPDATE GlobalParameters SET Value = 25 WHERE Name = 'CITY_CAPTURED_DAMAGE_PERCENTAGE'; -- Used to be 50
+UPDATE GlobalParameters SET Value = 75 WHERE Name = 'CITY_CAPTURED_DAMAGE_PERCENTAGE'; -- Used to be 50
  --Scaling turns of anarchy for choosing previous government
 UPDATE GlobalParameters SET Value = 1 WHERE Name = 'GOVERNMENT_BASE_ANARCHY_TURNS'; -- Used to be 2
  --Scaling Great work art lock time
