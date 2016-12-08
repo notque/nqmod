@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mod id="6ee26158-82e4-44e7-889f-76566174029d" version="2">
+  <Properties>
+    <Name>No Quitters Balance Mod</Name>
+    <Stability>Alpha</Stability>
+    <Teaser>No Quitters Balance Mod</Teaser>
+    <Description>No Quitters Balance Mod</Description>
+    <Authors>HellBlazer, NotQue</Authors>
+    <SpecialThanks>HellBlazer, NotQue</SpecialThanks>
+    <EnabledByDefault>1</EnabledByDefault>
+    <EnabledAtStartup>0</EnabledAtStartup>
+  </Properties>
+  <Dependencies />
+  <References />
+  <Blocks />
+	<Components>
+		<UpdateDatabase id="HB_BALANCE_COMPONENT">
+			<Properties>
+				<Ruleset>RULESET_STANDARD</Ruleset>
+			</Properties>
+			<Items>
+				<File>TerrainUpdates.sql</File>
+				<File>ResourceUpdates.sql</File>
+				<File>ImprovmentChanges.sql</File>
+				<File>TechCivicDescriptions.sql</File>
+				<File>GranaryDeerFood.sql</File>
+				<File>LighthouseChanges.sql</File>
+				<File>SeaportChanges.sql</File>
+				<File>GlobalParamUpdates.sql</File>
+				<File>TurnTimerUpdates.sql</File>
+				<File>Happiness.sql</File>
+				<File>PolicyUpdates.sql</File>
+				<File>CivicUpdates.sql</File>
+				<File>TechTreeUpdates.sql</File>
+				<File>UnitUpdates.sql</File>
+				<File>BuildingUpdates.sql</File>
+				<File>Districts.sql</File>
+				<File>QRules.sql</File>
+				<File>Religion.sql</File>
+				<File>PerCityPenalty.sql</File>
+				<File>HBRules.sql</File>
+			</Items>
+		</UpdateDatabase>
+		<LocalizedText id="HB_BALANCE__UPDATES">
+			<Properties>
+				<Ruleset>RULESET_STANDARD</Ruleset>
+			</Properties>
+			<Items>
+				<File>TextUpdates.sql</File>
+			</Items>
+		</LocalizedText>
+	</Components>
+  <Files>
+	<File>ResourceUpdates.sql</File>
+	<File>TerrainUpdates.sql</File>
+	<File>ImprovmentChanges.sql</File>
+	<File>TextUpdates.sql</File>
+	<File>TechCivicDescriptions.sql</File>
+	<File>GranaryDeerFood.sql</File>
+	<File>LighthouseChanges.sql</File>
+	<File>SeaportChanges.sql</File>
+	<File>GlobalParamUpdates.sql</File>
+	<File>TurnTimerUpdates.sql</File>
+	<File>Happiness.sql</File>
+	<File>PolicyUpdates.sql</File>
+	<File>CivicUpdates.sql</File>
+	<File>TechTreeUpdates.sql</File>
+	<File>UnitUpdates.sql</File>
+	<File>BuildingUpdates.sql</File>
+	<File>Districts.sql</File>
+	<File>QRules.sql</File>
+	<File>HBRules.sql</File>
+	<File>Religion.sql</File>
+	<File>PerCityPenalty.sql</File>
+  </Files>
+</Mod>

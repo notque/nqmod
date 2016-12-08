@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="d71b17af-948b-4fe7-8b03-84dad50b2961" version="1">
+  <Properties>
+    <Name>District Specialization Mod</Name>
+    <Stability>Alpha</Stability>
+    <Teaser>District Changes Mod</Teaser>
+    <Description>District Changes Mod</Description>
+    <Authors>flimaas, HellBlazer</Authors>
+    <SpecialThanks>flimaas, HellBlazer</SpecialThanks>
+    <EnabledByDefault>1</EnabledByDefault>
+    <EnabledAtStartup>1</EnabledAtStartup>
+  </Properties>
+  <Dependencies />
+  <References />
+  <Blocks />
+  <Files>
+  	<File>BuildingTexts.sql</File>
+	<File>CampusBuildingChanges.sql</File>
+	<File>CommercialHubBuildingChanges.sql</File>
+	<File>HolyDistrictBuildingChanges.sql</File>
+	<File>IndustrialZoneBuildingChanges.sql</File>
+	<File>TheaterSquareBuildingChanges.sql</File>
+  </Files>
+	<Components>
+		<UpdateDatabase id="DC_DATABASE_UPDATES">
+			<Items>
+				<File>CampusBuildingChanges.sql</File>
+				<File>CommercialHubBuildingChanges.sql</File>
+				<File>HolyDistrictBuildingChanges.sql</File>
+				<File>IndustrialZoneBuildingChanges.sql</File>
+				<File>TheaterSquareBuildingChanges.sql</File>
+			</Items>
+		</UpdateDatabase>
+		<LocalizedText id="DC_TEXT_UPDATES">
+			<Items>
+				<File>BuildingTexts.sql</File>
+			</Items>
+		</LocalizedText>
+	</Components>
+</Mod>

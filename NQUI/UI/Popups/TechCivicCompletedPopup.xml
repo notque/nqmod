@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context  ColorSet="BodyTextCool" FontStyle="Shadow">
+  
+	<Container Size="full,full">
+		<Stack ID="TechStack" Anchor="C,T" StackGrowth="Bottom" Offset="0,100"/>
+	</Container>
+  
+	<Instance							Name="UnlockInst">
+    <Container					ID="UnlockAni"					Anchor="C,T" Size="650,40" AutoSize="V">
+      <AlphaAnim				ID="Anim"					Anchor="C,T" AlphaBegin="0" AlphaEnd="1" Speed="3"  Size="650,parent" Cycle="OneBounce" EndPause="10" AutoSize="V">
+        <Grid					ID="TCGrid"									Style="Divider6Grid"	ConsumeMouse="0"						Size="800,50"		Color="54,160,234,150" Anchor="C,T" Offset="0,10">
+		  <!--<Image					ID="GradientT"	Anchor="L,T"	Texture="Controls_Gradient_HalfRadial" Size="parent,150"			Color="0,0,0,155" AnchorSide="I,O"/>
+		  <Image					ID="GradientB"	Anchor="L,B"	Texture="Controls_Gradient_HalfRadial" Size="parent,150"			Color="0,0,0,155" AnchorSide="I,O" FlipY="1"/> -->
+          <Label				ID="StatusLabel"	String="ERA COMPLETED" Anchor="C,T" Style="FontFlair26" FontStyle="glow" Color0="255,255,255,255" Color1="0,0,0,255" Offset="0,12" />
+        </Grid>
+      </AlphaAnim>
+    </Container>
+	</Instance>
+	
+	<!--
+	<Instance Name="UnlockInst">
+		<Container ID="UnlockAni" Size="full,full" Size="800,50">
+			<AlphaAnim				ID="TechPopupAnimation" AlphaBegin="0" AlphaEnd="1" Speed="0.4" Function="Root" Size="full,full" EndPause="9" Cycle="Once" >
+			<Grid							Style="Divider6Grid"	ConsumeMouse="0"						Size="800,50"		Color="54,160,234,150" Anchor="C,T">
+			  <Image					ID="GradientT"	Anchor="L,T"	Texture="Controls_Gradient_HalfRadial" Size="parent,150"			Color="0,0,0,255" AnchorSide="I,O"/>
+			  <Image					ID="GradientB"	Anchor="L,B"	Texture="Controls_Gradient_HalfRadial" Size="parent,150"			Color="0,0,0,255" AnchorSide="I,O" FlipY="1"/>
+			</Grid>
+
+			<AlphaAnim			ID="HeaderAlpha" AlphaBegin="0" AlphaEnd="1" Speed="1" Function="Root" Cycle="OneBounce" Size="full,full" Pause="0.6" EndPause="300">
+				<Label			ID="EraCompletedHeader" String="ERA COMPLETED" Anchor="C,T" Style="FontFlair26" FontStyle="glow" Color0="255,255,255,255" Color1="0,0,0,255" Offset="0,12"/>
+			</AlphaAnim>
+		  </AlphaAnim>
+	  </Container>
+  </Instance>
+  -->
+</Context>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+  <BaseGameText>
+  	<Row Tag="LOC_HUD_BUILDER_LENS">
+  		<Text>Builder</Text>
+  	</Row>
+  	<Row Tag="LOC_HUD_BUILDER_LENS_TOOLTIP">
+  		<Text>Highlights what hexes the builder can work on.</Text>
+  	</Row>
+  	<Row Tag="LOC_TOOLTIP_BUILDER_LENS_BREATHTAKING">
+  		<Text>Resource/Pillaged/Unique Ability</Text>
+  	</Row>
+  	<Row Tag="LOC_TOOLTIP_BUILDER_LENS_AVERAGE">
+  		<Text>Generic Tile</Text>
+  	</Row>
+  	<Row Tag="LOC_TOOLTIP_BUILDER_LENS_DISGUSTING">
+  		<Text>Nothing to do</Text>
+  	</Row>
+  </BaseGameText>
+</GameData>

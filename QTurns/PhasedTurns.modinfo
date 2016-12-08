@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="4a70287e-d963-432a-a05c-11d9595b2229" version="1">
+  <Properties>
+    <Name>notQue's Phased Turns Mod</Name>
+    <Stability>Alpha</Stability>
+    <Teaser>Enhanced Turn Mode that adds sperate turns for units and empire</Teaser>
+    <Description>Enhanced Turn Mode that adds sperate turns for units and empire</Description>
+    <Authors>notQue</Authors>
+    <SpecialThanks>notQue</SpecialThanks>
+    <EnabledByDefault>1</EnabledByDefault>
+    <EnabledAtStartup>1</EnabledAtStartup>
+  </Properties>
+  <Dependencies />
+  <References />
+  <Blocks />
+  <Files>
+    <File>UI/ActionPanel.lua</File>
+    <File>PhasedTurns.xml</File>
+  </Files>
+  <Components>
+    
+    <ImportFiles id="Q_IMPORT">
+      <Items>
+        <File>UI/ActionPanel.lua</File>
+      </Items>
+    </ImportFiles>
+    
+    <UpdateDatabase id="Q_COMPONENT">
+      <Items>
+        <File>PhasedTurns.xml</File>
+      </Items>
+    </UpdateDatabase>
+  </Components>
+</Mod>

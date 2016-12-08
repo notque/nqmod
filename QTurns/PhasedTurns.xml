@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<GameInfo>
+	<TurnSegments>
+		<Update>
+			<Set AllowStrategicCommands="1" />
+			<Where TurnSegmentType="TURNSEG_TACTICAL" />
+		</Update>
+	</TurnSegments>
+
+	<TurnSegments>
+		<Update>
+			<Set TimeLimit_PerUnit="4" />
+			<Where TurnSegmentType="TURNSEG_TACTICAL" />
+		</Update>
+	</TurnSegments>
+
+	<TurnSegments>
+		<Update>
+			<Set TimeLimit_PerCity="4" />
+			<Where TurnSegmentType="TURNSEG_STRATEGIC" />
+		</Update>
+	</TurnSegments>
+
+	<TurnPhases>
+		<Update>
+			<Set PhaseOrder="0" />
+			<Where ActiveSegmentType="TURNSEG_STRATEGIC" />
+		</Update>
+	</TurnPhases>
+
+	<TurnPhases>
+		<Update>
+			<Set PhaseOrder="1" />
+			<Where ActiveSegmentType="TURNSEG_TACTICAL" />
+		</Update>
+	</TurnPhases>
+
+</GameInfo>
