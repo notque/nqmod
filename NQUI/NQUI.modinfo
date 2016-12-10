@@ -49,8 +49,6 @@
 	<File>UI/ProductionPanel.xml</File>
 	<File>UI/StrategicView_MapPlacement.lua</File>
 	<File>UI/SupportFunctions.lua</File>
-	<File>UI/TradeOverview.xml</File>
-	<File>UI/TradeOverview.lua</File>
 	<File>UI/Choosers/TradeRouteChooser.xml</File>
 	<File>UI/Choosers/TradeRouteChooser.lua</File>
 	<File>UI/Choosers/TradeOriginChooser.xml</File>
@@ -115,8 +113,6 @@
 				<File>UI/ProductionPanel.xml</File>
 				<File>UI/StrategicView_MapPlacement.lua</File>
 				<File>UI/SupportFunctions.lua</File>
-				<File>UI/TradeOverview.xml</File>
-				<File>UI/TradeOverview.lua</File>
 				<File>UI/Choosers/TradeRouteChooser.xml</File>
 				<File>UI/Choosers/TradeRouteChooser.lua</File>
 				<File>UI/Choosers/TradeOriginChooser.xml</File>
