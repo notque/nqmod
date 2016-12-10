@@ -1389,17 +1389,19 @@ function OnPlayerTurnActivated( ePlayer:number, bFirstTimeThisTurn:boolean )
 				local unitID		:number		= pUnit:GetID();
 				local unitOwnerID	:number		= pUnit:GetOwner();
 				local flag			:UnitFlag	= GetUnitFlag( unitOwnerID, unitID );
+				if(flag ~= nil and flag.m_Instance ~= nil) then
 
-				if targetPlayer ~= -1 and targetPlayer == idLocalPlayer then
-					if flag.m_Instance.FlagRoot["AttentionInstance"] == nil then
-						local pInstance		:table = {};
-						ContextPtr:BuildInstanceForControl( "AttentionMarkerInstance", pInstance, flag.m_Instance.FlagRoot );
-						flag.m_Instance.FlagRoot["AttentionInstance"] = pInstance;
-					end
-				else
-					if flag.m_Instance.FlagRoot["AttentionInstance"] ~= nil then
-						flag.m_Instance.FlagRoot:DestroyChild( flag.m_Instance.FlagRoot["AttentionInstance"] );
-						flag.m_Instance.FlagRoot["AttentionInstance"] = nil;
+					if targetPlayer ~= -1 and targetPlayer == idLocalPlayer then
+						if flag.m_Instance.FlagRoot["AttentionInstance"] == nil then
+							local pInstance		:table = {};
+							ContextPtr:BuildInstanceForControl( "AttentionMarkerInstance", pInstance, flag.m_Instance.FlagRoot );
+							flag.m_Instance.FlagRoot["AttentionInstance"] = pInstance;
+						end
+					else
+						if flag.m_Instance.FlagRoot["AttentionInstance"] ~= nil then
+							flag.m_Instance.FlagRoot:DestroyChild( flag.m_Instance.FlagRoot["AttentionInstance"] );
+							flag.m_Instance.FlagRoot["AttentionInstance"] = nil;
+						end
 					end
 				end
 			end
