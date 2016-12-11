@@ -24,7 +24,13 @@
 	<File>UI/ToolTipHelper.lua</File>
 	<File>UI/Popups/NaturalWonderPopup.lua</File> <!-- 		 by ouglaaa  -->
 	<File>UI/WorldInput.lua</File>
+  <File>UI/WorldInput.xml</File>
+  <File>UI/WorldViewIconsManager.lua</File>
+  <File>UI/WorldViewIconsManager.xml</File>
+  <File>UI/CitySupport.lua</File>
 	<File>UI/BetterTradeScreen_Text.xml</File>
+  <File>UI/GreatWorksOverview.lua</File>
+  <File>UI/GreatWorksOverview.xml</File>
 	<File>UI/TradeOriginChooser.lua</File>
 	<File>UI/TradeOriginChooser.xml</File>
 	<File>UI/TradeOverview.lua</File>
@@ -33,8 +39,18 @@
 	<File>UI/TradeRouteChooser.xml</File>
 	<File>UI/Panels/CityPanel.lua</File>
 	<File>UI/Panels/CityPanel.xml</File>
+  <File>UI/Panels/CityPanelOverview.lua</File>
+  <File>UI/Panels/CityPanelOverview.xml</File>
+  <File>UI/PartialScreens/CityStates.lua</File>
+  <File>UI/PartialScreens/CityStates.xml</File>
+  <File>UI/PartialScreens/EspionageOverview.lua</File>
+  <File>UI/PartialScreens/EspionageOverview.xml</File>
+  <File>UI/PartialScreens/WorldRankings.lua</File>
+  <File>UI/PartialScreens/WorldRankings.xml</File>
 	<File>UI/Popups/GreatPeoplePopup.lua</File>
 	<File>UI/Popups/GreatPeoplePopup.xml</File>
+  <File>UI/Screens/GovernmentScreen.lua</File>
+  <File>UI/Screens/GovernmentScreen.xml</File>
 	<File>Civilopedia/CivilopediaSupport.lua</File>
 	<File>UI/TopPanel.lua</File>
   <File>UI/DiplomacyActionView.lua</File>
@@ -64,6 +80,9 @@
 	<File>UI/WorldView/CityBannerManager.xml</File>
 	<File>UI/WorldView/PlotInfo.xml</File>
 	<File>UI/WorldView/PlotInfo.lua</File>
+  <File>UI/ToolTips/PlotToolTip.lua</File>
+  <File>UI/TopPanel.xml</File>
+  <File>UI/UnitFlagManager.lua</File>
   </Files>
 	<Settings>
 		<Custom id="HB_UI_SETTING">
@@ -93,7 +112,11 @@
 	      <File>UI/ToolTipHelper.lua</File>
 				<File>UI/Popups/NaturalWonderPopup.lua</File> 
 				<File>UI/WorldInput.lua</File>
+        <File>UI/WorldInput.xml</File>
+        <File>UI/CitySupport.lua</File>
 				<File>UI/BetterTradeScreen_Text.xml</File>
+        <File>UI/GreatWorksOverview.lua</File>
+        <File>UI/GreatWorksOverview.xml</File>
 				<File>UI/TradeOriginChooser.lua</File>
 				<File>UI/TradeOriginChooser.xml</File>
 				<File>UI/TradeOverview.lua</File>
@@ -102,6 +125,16 @@
 				<File>UI/TradeRouteChooser.xml</File>
 				<File>UI/Panels/CityPanel.lua</File>
 				<File>UI/Panels/CityPanel.xml</File>
+        <File>UI/Panels/CityPanelOverview.lua</File>
+        <File>UI/Panels/CityPanelOverview.xml</File>
+        <File>UI/Screens/GovernmentScreen.lua</File>
+        <File>UI/Screens/GovernmentScreen.xml</File>
+        <File>UI/PartialScreens/CityStates.lua</File>
+        <File>UI/PartialScreens/CityStates.xml</File>
+        <File>UI/PartialScreens/EspionageOverview.lua</File>
+        <File>UI/PartialScreens/EspionageOverview.xml</File>
+        <File>UI/PartialScreens/WorldRankings.lua</File>
+        <File>UI/PartialScreens/WorldRankings.xml</File>
 				<File>UI/Popups/GreatPeoplePopup.lua</File>
 				<File>Civilopedia/CivilopediaSupport.lua</File>
 				<File>UI/TopPanel.lua</File>
@@ -128,10 +161,16 @@
 				<File>UI/Choosers/TradeOriginChooser.xml</File>
 				<File>UI/Choosers/TradeOriginChooser.lua</File>
 				<File>UI/ReligionScreen.lua</File>
+        <File>UI/WorldViewIconsManager.lua</File>
+        <File>UI/WorldViewIconsManager.xml</File>
 				<File>UI/WorldView/CityBannerManager.lua</File>
 				<File>UI/WorldView/CityBannerManager.xml</File>
 				<File>UI/WorldView/PlotInfo.xml</File>
 				<File>UI/WorldView/PlotInfo.lua</File>
+        <File>UI/ToolTips/PlotToolTip.lua</File>
+        <File>UI/TopPanel.xml</File>
+        <File>UI/UnitFlagManager.lua</File>
+
 			</Items>
 		</ImportFiles>
 	</Components>
