@@ -60,6 +60,7 @@ function AssignStartingPlots.Create(args)
 		uiStartConfig = args.START_CONFIG or 2,
 		waterMap  = args.WATER or false,
 		landMap  = args.LAND or false,
+			forceAllCivsOnLargestLandMass = args.FORCE_ALL_CIVS_ON_LARGEST_LANDMASS or false,
 		majorStartPlots = {},
 		majorCopy = {},
 		minorStartPlots = {},
@@ -118,25 +119,29 @@ function AssignStartingPlots:__InitStartingData()
 
 	print("Number Of Starting Locations: ", iMajorCivStartLocs);
 
-	-- We are going to find the x largest areas where x = # of major civs
-	-- We will mark these as valid landmasses to start on.  This will fix island maps dropping players
-	local tempViableAreas = {};
+
+
+	if(self.forceAllCivsOnLargestLandMass) then 
+		-- This will force all placements to occur only on the largest landmass
+		table.insert(self.viableAreas, Areas.FindBiggestArea(false));
+	else
+		-- We are going to find the x largest areas where x = # of major civs
+		-- We will mark these as valid landmasses to start on.  This will fix island maps dropping players
+		local tempViableAreas = {};
 		for i, area in Areas:Members() do
 			table.insert(tempViableAreas, area);
 		end
-	table.sort (tempViableAreas, function(a, b) return a:GetPlotCount() > b:GetPlotCount(); end);
-
-	local numViableAreas = self.iNumMajorCivs + self.iNumMinorCivs /2;
-	for i=1,numViableAreas do
-		table.insert(self.viableAreas, tempViableAreas[i]);
+		table.sort (tempViableAreas, function(a, b) return a:GetPlotCount() > b:GetPlotCount(); end);
+	
+		local numViableAreas = self.iNumMajorCivs + self.iNumMinorCivs /2;
+		for i=1,numViableAreas do
+			table.insert(self.viableAreas, tempViableAreas[i]);
+		end
 	end
 
 	print("========= VIABLE AREAS ==========");
 	for i, area in pairs(self.viableAreas) do
 		print(tostring(i) .. ": plot count = " .. tostring(area:GetPlotCount()));
-		if (area:GetID() == plotAreaID) then
-			plotIsViable = true;
-		end
 	end
 	print("=================================");
 
