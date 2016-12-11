@@ -36,6 +36,8 @@
 	<File>UI/Popups/GreatPeoplePopup.xml</File>
 	<File>Civilopedia/CivilopediaSupport.lua</File>
 	<File>UI/TopPanel.lua</File>
+  <File>UI/DiplomacyActionView.lua</File>
+	<File>UI/DiplomacyActionView.xml</File>
 	<File>UI/Panels/NewTurnPanel.xml</File>
 	<File>UI/Menus/InGameTopOptionsMenu.lua</File>
 	<File>UI/FrontEnd/MainMenu.lua</File>
@@ -101,6 +103,8 @@
 				<File>UI/Popups/GreatPeoplePopup.lua</File>
 				<File>Civilopedia/CivilopediaSupport.lua</File>
 				<File>UI/TopPanel.lua</File>
+				<File>UI/DiplomacyActionView.lua</File>
+				<File>UI/DiplomacyActionView.xml</File>
 				<File>UI/Panels/NewTurnPanel.xml</File>
 				<File>UI/Popups/GreatPeoplePopup.xml</File>
 				<File>UI/Menus/InGameTopOptionsMenu.lua</File>
