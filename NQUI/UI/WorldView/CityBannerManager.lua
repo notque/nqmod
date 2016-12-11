@@ -781,8 +781,6 @@ function CityBanner.UpdateStats( self : CityBanner)
 
 			local iCurrentTurn = Game.GetCurrentGameTurn();
 
-			print("Turn: " .. iCurrentTurn .. " Pop: " .. currentPopulation);
-
 			if (localPlayerID == pCity:GetOwner()) then
 				if (self.m_BannerTurn ~= iCurrentTurn) then
 					
