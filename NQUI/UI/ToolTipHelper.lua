@@ -105,6 +105,9 @@ ToolTipHelper.GetAdjacencyBonuses = function(t, field, key)
 	return bonuses;
 end
 
+ToolTipHelper.GetBuildingToolTip = function(buildingType)
+	return ToolTipHelper.GetBuildingToolTip(buildingType, 0, nil);
+end
 
 -------------------------------------------------------------------------------
 ToolTipHelper.GetBuildingToolTip = function(buildingHash, playerId, city)

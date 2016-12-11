@@ -8,6 +8,7 @@ include( "InputSupport" );
 include( "InstanceManager" );
 include( "SupportFunctions" );
 include( "Civ6Common" );
+include( "ToolTipHelper" );
 
 
 -- ===========================================================================
@@ -302,6 +303,7 @@ function OnLoadScreenContentReady()
 		ContextPtr:BuildInstanceForControl("IconInfoInstance", instance, Controls.FeaturesStack );
 		iconAtlas = "ICON_"..item.Type;
 		instance.Icon:SetIcon(iconAtlas);
+		instance.Top:SetToolTipString(ToolTipHelper.GetUnitToolTip(item.Type));
 		instance.TextStack:SetOffsetX( size + 4 );
 		local headerText:string = Locale.ToUpper(Locale.Lookup( item.Name ));
 		instance.Header:SetText( headerText );
@@ -316,6 +318,7 @@ function OnLoadScreenContentReady()
 		instance.Icon:SetSizeVal(38,38);
 		iconAtlas = "ICON_"..item.Type;
 		instance.Icon:SetIcon(iconAtlas);
+		instance.Top:SetToolTipString(ToolTipHelper.GetBuildingToolTip(item.Type));
 		instance.TextStack:SetOffsetX( size + 4 );
 		local headerText:string = Locale.ToUpper(Locale.Lookup( item.Name ));
 		instance.Header:SetText( headerText );
