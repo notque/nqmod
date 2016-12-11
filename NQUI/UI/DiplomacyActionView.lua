@@ -6,6 +6,7 @@ include( "SupportFunctions" );
 include( "Civ6Common" );
 include( "LeaderSupport" );
 include( "DiplomacyStatementSupport" );
+include( "ToolTipHelper" );
 
 -- ===========================================================================
 --	CONSTANTS
@@ -1785,6 +1786,7 @@ function SetUniqueCivLeaderData()
 		local instance:table = {};
 		instance = ms_uniqueIconIM:GetInstance();
 		iconAtlas = "ICON_"..item.Type;
+		instance.Top:SetToolTipString(ToolTipHelper.GetSmartToolTip(item.Type));
 		instance.Icon:SetIcon(iconAtlas);
 		instance.TextStack:SetOffsetX( size + 4 );
 		local headerText:string = Locale.ToUpper(Locale.Lookup( item.Name ));
@@ -1798,6 +1800,7 @@ function SetUniqueCivLeaderData()
 		instance = ms_uniqueIconIM:GetInstance();
 		instance.Icon:SetSizeVal(38,38);
 		iconAtlas = "ICON_"..item.Type;
+		instance.Top:SetToolTipString(ToolTipHelper.GetSmartToolTip(item.Type));
 		instance.Icon:SetIcon(iconAtlas);
 		instance.TextStack:SetOffsetX( size + 4 );
 		local headerText:string = Locale.ToUpper(Locale.Lookup( item.Name ));

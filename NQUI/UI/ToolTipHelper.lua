@@ -105,6 +105,29 @@ ToolTipHelper.GetAdjacencyBonuses = function(t, field, key)
 	return bonuses;
 end
 
+
+ToolTipHelper.GetSmartToolTip = function(type)
+	local building = GameInfo.Buildings[type];
+	if (building ~= nil) then
+		return ToolTipHelper.GetBuildingToolTip(type);
+	end
+	
+	local district = GameInfo.Districts[type];
+	if(district ~= nil) then
+		return ToolTipHelper.GetDistrictToolTip(type);
+	end
+		
+	local improvement = GameInfo.Improvements[type];
+	if(improvement ~= nil) then
+		return ToolTipHelper.GetImprovementToolTip(type);
+	end
+	
+	local unit = GameInfo.Units[type];
+	if(unit ~= nil) then
+		return ToolTipHelper.GetUnitToolTip(type);
+	end
+end
+
 ToolTipHelper.GetBuildingToolTip = function(buildingType)
 	return ToolTipHelper.GetBuildingToolTip(buildingType, 0, nil);
 end

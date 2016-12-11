@@ -21,6 +21,7 @@
 	<File>UI/Panels/StatusMessagePanel.xml</File>
 	<File>UI/Panels/UnitPanel.lua</File>
 	<File>UI/Tooltips/PlotToolTip.lua</File>
+	<File>UI/ToolTipHelper.lua</File>
 	<File>UI/Popups/NaturalWonderPopup.lua</File> <!-- 		 by ouglaaa  -->
 	<File>UI/WorldInput.lua</File>
 	<File>UI/BetterTradeScreen_Text.xml</File>
@@ -89,6 +90,7 @@
 				<File>UI/Panels/StatusMessagePanel.xml</File>
 				<File>UI/Panels/UnitPanel.lua</File>
 				<File>UI/Tooltips/PlotToolTip.lua</File>
+	      <File>UI/ToolTipHelper.lua</File>
 				<File>UI/Popups/NaturalWonderPopup.lua</File> 
 				<File>UI/WorldInput.lua</File>
 				<File>UI/BetterTradeScreen_Text.xml</File>
