@@ -518,7 +518,7 @@ function ViewMain( data:table )
 	Controls.GrowthTurnsBarSmall:SetPercent( data.CurrentFoodPercent );
 	Controls.GrowthTurnsBarSmall:SetShadowPercent( data.FoodPercentNextTurn );
 
-	local cCulture = selectedCity:GetCulture();
+	local cCulture = data.City:GetCulture();
 	--GetCurrentCulture, GetNextPlot, GetNextPlotCultureCost, GetTourism, GetTurnsUntilExpansion
 	local cultureCurrent = cCulture:GetCurrentCulture();
 	local cultureNeeded = cCulture:GetNextPlotCultureCost()
@@ -549,7 +549,7 @@ function ViewMain( data:table )
 		GrowthTurnsBar_toolTip = Locale.ToUpper( Locale.Lookup("LOC_HUD_CITY_TURNS_UNTIL_LOSS", math.abs(data.TurnsUntilGrowth)))
 	end
 
-	local cGrowth = selectedCity:GetGrowth();
+	local cGrowth = data.City:GetGrowth();
 
 	Controls.GrowthTurnsBar:SetToolTipString(GrowthTurnsBar_toolTip.."[NEWLINE][ICON_Food] "..round(cGrowth:GetFood(), 1).."/"..cGrowth:GetGrowthThreshold().." ("..toPlusMinusString(totalFood)..")")
 	--Controls.GrowthTurnsBar:SetToolTipString(GrowthTurnsBar_toolTip)

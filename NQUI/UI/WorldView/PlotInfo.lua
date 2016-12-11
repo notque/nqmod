@@ -602,6 +602,9 @@ end
 -- ===========================================================================
 function HideNextCityPlot()
 	local pSelectedCity					:table 	= UI.GetHeadSelectedCity();
+	if(pSelectedCity == nil) then
+		return ;
+	end
 	local pCityCulture					:table 	= pSelectedCity:GetCulture();
 	local pNextPlotID						:number = pCityCulture:GetNextPlot();
 	local pInstance							:table  = {};
