@@ -24,6 +24,10 @@
 	<File>UI/Popups/NaturalWonderPopup.lua</File> <!-- 		 by ouglaaa  -->
 	<File>UI/WorldInput.lua</File>
 	<File>UI/BetterTradeScreen_Text.xml</File>
+	<File>UI/GreatWorkShowcase.lua</File>
+	<File>UI/GreatWorkShowcase.xml</File>
+  <File>UI/GreatWorksOverview.lua</File>
+  <File>UI/GreatWorksOverview.xml</File>
 	<File>UI/TradeOriginChooser.lua</File>
 	<File>UI/TradeOriginChooser.xml</File>
 	<File>UI/TradeOverview.lua</File>
@@ -90,6 +94,10 @@
 				<File>UI/Popups/NaturalWonderPopup.lua</File> 
 				<File>UI/WorldInput.lua</File>
 				<File>UI/BetterTradeScreen_Text.xml</File>
+      	<File>UI/GreatWorkShowcase.lua</File>
+      	<File>UI/GreatWorkShowcase.xml</File>
+      	<File>UI/GreatWorksOverview.lua</File>
+      	<File>UI/GreatWorksOverview.xml</File>
 				<File>UI/TradeOriginChooser.lua</File>
 				<File>UI/TradeOriginChooser.xml</File>
 				<File>UI/TradeOverview.lua</File>
