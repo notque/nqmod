@@ -110,6 +110,13 @@ function UpdateGreatWork()
 	local greatWorkCreationBuilding:string = Locale.Lookup(GameInfo.Buildings[m_BuildingID].Name);
 	local greatWorkObjectType:string = greatWorkInfo.GreatWorkObjectType;
 
+
+	local trimmedGreatWorkCreator = greatWorkCreator:gsub("%s+", "");
+	if (trimmedGreatWorkCreator == "") then
+		greatWorkCreator = Locale.Lookup("LOC_CIVILIZATION_BARBARIAN_DESCRIPTION");
+	end
+
+
 	local greatWorkTypeName:string;
 	if greatWorkInfo.EraType ~= nil then
 		greatWorkTypeName = Locale.Lookup("LOC_" .. greatWorkInfo.GreatWorkObjectType .. "_" .. greatWorkInfo.EraType);

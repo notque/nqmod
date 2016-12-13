@@ -473,6 +473,11 @@ function GetGreatWorkTooltip(pCityBldgs:table, greatWorkIndex:number, greatWorkT
 	local greatWorkYields:string = YIELD_FONT_ICONS[yieldType] .. yieldValue .. " " .. YIELD_FONT_ICONS[DATA_FIELD_TOURISM_YIELD] .. greatWorkInfo.Tourism;
 	local buildingName:string = Locale.Lookup(GameInfo.Buildings[pBuildingInfo.BuildingType].Name);
 	
+	local trimmedGreatWorkCreator = greatWorkCreator:gsub("%s+", "");
+	if (trimmedGreatWorkCreator == "") then
+		greatWorkCreator = Locale.Lookup("LOC_CIVILIZATION_BARBARIAN_DESCRIPTION");
+	end
+	
 	if greatWorkInfo.EraType ~= nil then
 		greatWorkTypeName = Locale.Lookup("LOC_" .. greatWorkInfo.GreatWorkObjectType .. "_" .. greatWorkInfo.EraType);
 	else
