@@ -129,8 +129,6 @@ function GenerateMap()
 		START_MAX_Y = 20,
 		START_CONFIG = startConfig,
 		LAND = true,
-		FORCE_ALL_CIVS_ON_LARGEST_LANDMASS = true,
-
 	};
 
 	
@@ -344,10 +342,10 @@ function GeneratePlotTypes()
 		local y = 6 + TerrainBuilder.GetRandomNumber((iH-12), "");	
 		local plotIndex = y * iW + x;
 		local radius = 2 + math.floor(TerrainBuilder.GetRandomNumber((islCount/iLandSize), ""));
-		print("Count: ", islCount);
-		print ("Radius: ", radius);
-		print("X=", x);
-		print("Y=", y);		
+		--print("Count: ", islCount);
+		--print ("Radius: ", radius);
+		--print("X=", x);
+		--print("Y=", y);		
 
 		--print("--------");
 		--print("Random Plot Is: ", plotIndex);
@@ -499,12 +497,6 @@ function GeneratePlotTypes()
 			end
 		end
 	end
-
-
-
-
-
-
 
 	return plotTypes;
 end
