@@ -28,6 +28,7 @@ UPDATE GlobalParameters SET Value = '3' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_RE
 UPDATE GlobalParameters SET Value = '0' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_REQ_AMENITIES_FOUNDED_CITY'; -- was 0
 UPDATE GlobalParameters SET Value = '1' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_REQ_AMENITIES_NONFOUNDED_CITY'; -- was 1
 UPDATE GlobalParameters SET Value = '16' WHERE Name = 'WAR_WEARINESS_WARMONGER_BASE'; -- was 16
+-- increased War Weariness points for amenity loss, essentially cutting war weariness a bit.
 UPDATE GlobalParameters SET Value = '400' WHERE Name = 'WAR_WEARINESS_POINTS_FOR_AMENITY_LOSS'; -- was 400
  
 -- Remove base war weariness penalty for Defending in your lands, still loses for killing units
@@ -79,6 +80,108 @@ UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'MINOR_CIV_RELIGIOUS_Y
 UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'MINOR_CIV_CULTURAL_YIELD_FOR_THEATER_DISTRICT' and Name = 'Amount';
 UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'MINOR_CIV_INDUSTRIAL_BUILDING_PRODUCTION_FOR_INDUSTRIAL_ZONE' and Name = 'Amount';
  
+ -----------------------------------------------
+-- Districts
+-----------------------------------------------
+-- Entertainment Complex - Needs stronger buff.
+
+-- Change Entertainment Complex Plunder to gold
+UPDATE Districts SET PlunderType = 'PLUNDER_GOLD', PlunderAmount = 50 WHERE 
+    DistrictType = 'DISTRICT_ENTERTAINMENT_COMPLEX' or DistrictType = 'DISTRICT_STREET_CARNIVAL'; -- Was Healing
+-- Add Merchant GPP to Entertainment Complex 
+INSERT INTO District_GreatPersonPoints (DistrictType, GreatPersonClassType, PointsPerTurn) VALUES 
+            ('DISTRICT_ENTERTAINMENT_COMPLEX', 'GREAT_PERSON_CLASS_MERCHANT', 1),
+            ('DISTRICT_STREET_CARNIVAL', 'GREAT_PERSON_CLASS_MERCHANT', 1);
+-- Add Adjacency for District_Gold
+INSERT INTO District_Adjacencies (DistrictType, YieldChangeId) VALUES 
+            ('DISTRICT_ENTERTAINMENT_COMPLEX', 'District_Gold'),
+            ('DISTRICT_STREET_CARNIVAL', 'District_Gold');
+-- Add Culture/Gold Adjacency for Neighborhoods next to Entertainment Complexes (TODO)
+
+
+-- Holy Site - Needs stronger buff
+
+ -- Religious Buildings give 1 amenity each / Tried this, it removed value from Entertainment Complex....
+--UPDATE Buildings SET Entertainment = 1 Where PurchaseYield = 'YIELD_FAITH';
+-- Must purchase Third Tier Religious buildings with Faith
+UPDATE Buildings SET MustPurchase = 1 Where PurchaseYield = 'YIELD_FAITH';
+-- Regional Range of 6 for Third Tier Buildings / Try to replace this instead with 25/50% higher spread rate for religion?
+UPDATE Buildings SET RegionalRange = 6 Where PurchaseYield = 'YIELD_FAITH';
+
+-- Add Religious Spread to third tier buildings
+INSERT INTO BuildingModifiers (BuildingType, ModifierId)
+VALUES  ('BUILDING_CATHEDRAL', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_GURDWARA', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_MEETING_HOUSE', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_MOSQUE', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_PAGODA', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_SYNAGOGUE', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_WAT', 'RELIGION_BUILDING_SPREAD');
+
+
+--MODIFIER_PLAYER_RELIGION_ADJUST_RELIGIOUS_SPREAD_STRENGTH
+INSERT INTO Modifiers (ModifierId, ModifierType)
+VALUES ('RELIGION_BUILDING_SPREAD', 'MODIFIER_PLAYER_RELIGION_ADJUST_RELIGIOUS_SPREAD_STRENGTH');
+
+INSERT INTO ModifierArguments (ModifierId, Name, Value) 
+VALUES ('RELIGION_BUILDING_SPREAD','SpreadMultiplier','20');
+
+-- Culture District needs stronger buff.
+
+-----------------------------------------------
+-- Unique Tile Improvements
+-----------------------------------------------
+--Chateau Improvement, No longer Requires a river, 1 housing per. +1 Culture
+UPDATE Improvements SET TilesRequired='1', Housing='1', 
+                        RequiresRiver='0', SameAdjacentValid='0'
+WHERE ImprovementType ='IMPROVEMENT_CHATEAU';
+UPDATE Improvement_YieldChanges SET YieldChange='2'
+WHERE ImprovementType ='IMPROVEMENT_CHATEAU' and YieldType='YIELD_CULTURE';
+
+-- Ziggurat add some housing, and some culture
+UPDATE Improvements SET TilesRequired='2', Housing='1', SameAdjacentValid='0'
+WHERE ImprovementType ='IMPROVEMENT_ZIGGURAT';
+UPDATE Improvement_YieldChanges SET YieldChange='1'
+WHERE ImprovementType ='IMPROVEMENT_ZIGGURAT' and YieldType='YIELD_CULTURE';
+
+
+UPDATE Improvements SET TilesRequired='2', Housing='1', SameAdjacentValid='0'
+WHERE ImprovementType ='IMPROVEMENT_MISSION';
+UPDATE Improvement_YieldChanges SET YieldChange='1'
+WHERE ImprovementType ='IMPROVEMENT_MISSION' and YieldType='YIELD_SCIENCE';
+UPDATE Improvement_YieldChanges SET YieldChange='2'
+WHERE ImprovementType ='IMPROVEMENT_MISSION' and YieldType='YIELD_FAITH';
+UPDATE Improvement_YieldChanges SET YieldChange='0'
+WHERE ImprovementType ='IMPROVEMENT_MISSION' and YieldType='YIELD_GOLD';
+
+UPDATE Improvements SET SameAdjacentValid='0'
+WHERE ImprovementType ='IMPROVEMENT_KURGAN';
+UPDATE Improvement_YieldChanges SET YieldChange='2'
+WHERE ImprovementType ='IMPROVEMENT_KURGAN' and YieldType='YIELD_GOLD';
+UPDATE Improvement_YieldChanges SET YieldChange='1'
+WHERE ImprovementType ='IMPROVEMENT_KURGAN' and YieldType='YIELD_FAITH';
+UPDATE Improvement_YieldChanges SET YieldChange='1'
+WHERE ImprovementType ='IMPROVEMENT_KURGAN' and YieldType='YIELD_CULTURE';
+
+-- Great Wall, Add Gold
+UPDATE Improvement_YieldChanges SET YieldChange='2'
+WHERE ImprovementType ='IMPROVEMENT_GREATWALL' and YieldType='YIELD_GOLD';
+
+-- Add two gold to Quarries to make them more useful instead of just something to harvest.
+UPDATE Improvement_YieldChanges SET YieldChange='2'
+WHERE ImprovementType ='IMPROVEMENT_QUARRY' and YieldType='YIELD_GOLD';
+
+-- Collosal Head +4 Faith
+UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_COLOSSAL_HEAD';
+UPDATE Improvement_YieldChanges SET YieldChange='4'
+WHERE ImprovementType ='IMPROVEMENT_COLOSSAL_HEAD' and YieldType='YIELD_FAITH';
+
+UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_ROMAN_FORT';
+UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_AIRSTRIP';
+UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_FORT';
+--UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_BEACH_RESORT';
+
+
 -----------------------------------------------
 -- Projects
 -----------------------------------------------
@@ -95,16 +198,15 @@ UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'MINOR_CIV_INDUSTRIAL_
 -----------------------------------------------
 -- Religion
 -----------------------------------------------
-UPDATE GlobalParameters SET Value = 2 WHERE Name = 'RELIGION_SPREAD_ADJACENT_PER_TURN_PRESSURE'; -- Was 1
-UPDATE GlobalParameters SET Value = 100 WHERE Name = 'RELIGION_SPREAD_ATHEISM_PRESSURE_PER_POP'; -- Was 50
-UPDATE GlobalParameters SET Value = 400 WHERE Name = 'RELIGION_SPREAD_HOLY_CITY_PRESSURE_PER_POP'; -- Was 200
+UPDATE GlobalParameters SET Value = 4 WHERE Name = 'RELIGION_SPREAD_ADJACENT_PER_TURN_PRESSURE'; -- Was 1
+UPDATE GlobalParameters SET Value = 50 WHERE Name = 'RELIGION_SPREAD_ATHEISM_PRESSURE_PER_POP'; -- Was 50
+UPDATE GlobalParameters SET Value = 200 WHERE Name = 'RELIGION_SPREAD_HOLY_CITY_PRESSURE_PER_POP'; -- Was 200
 UPDATE GlobalParameters SET Value = 8 WHERE Name = 'RELIGION_SPREAD_HOLY_CITY_PRESSURE_MULTIPLIER'; -- Was 4
 UPDATE GlobalParameters SET Value = 4 WHERE Name = 'RELIGION_SPREAD_HOLY_SITE_PRESSURE_MULTIPLIER'; -- Was 2
+UPDATE GlobalParameters SET Value = 10 WHERE Name = 'RELIGION_SPREAD_ADJACENT_CITY_DISTANCE'; -- Was 10
 -- No losing pressure for military units capturing religious units - Can this go negative and give you pressure?
-UPDATE GlobalParameters SET Value = 0 WHERE Name = 'RELIGION_SPREAD_UNIT_CAPTURE'; -- Was 125
+--UPDATE GlobalParameters SET Value = -125 WHERE Name = 'RELIGION_SPREAD_UNIT_CAPTURE'; -- Was 125
 
- -- Religious Buildings give 1 amenity each
-UPDATE Buildings SET Entertainment = 1 Where PurchaseYield = 'YIELD_FAITH';
 
 -- Make Religious Units able to move better.
 --UPDATE GlobalParameters SET Value=3 WHERE Name='PLOT_UNIT_LIMIT';
@@ -134,8 +236,8 @@ UPDATE GlobalParameters SET Value = 10 WHERE Name = 'TRADE_ROUTE_TURN_DURATION_B
 -----------------------------------------------
 -- Growth
 -----------------------------------------------
--- Scaling for online speed. -- Still testing
-UPDATE GlobalParameters SET Value = 4 WHERE Name = 'CITY_GROWTH_MULTIPLIER'; -- Was 8
+-- Scaling for online speed. -- Still testing -- It's already scaled, reverting to what it was.
+UPDATE GlobalParameters SET Value = 8 WHERE Name = 'CITY_GROWTH_MULTIPLIER'; -- Was 8
  
 -----------------------------------------------
 -- Units
@@ -166,7 +268,11 @@ UPDATE Units SET Maintenance = Maintenance + 1 WHERE Maintenance = 0 AND NOT Uni
 --INSERT INTO RequirementSets (RequirementSetId, RequirementSetType) VALUES ('BYPASS_WALLS_REQUIREMENTS','REQUIREMENTSET_TEST_ALL');
 --INSERT INTO RequirementSetRequirements (RequirementSetId, RequirementId) VALUES ('BYPASS_WALLS_REQUIREMENTS','UNIT_IS_MELEE_REQUIREMENT');
 --UPDATE Modifiers Set SubjectRequirementSetId = 'BYPASS_WALLS_REQUIREMENTS' where ModifierId = 'BYPASS_WALLS';
- 
+--UPDATE DynamicModifiers Set CollectionType = 'COLLECTION_PLAYER_UNITS' where ModifierType = 'MODIFIER_PLAYER_UNIT_ADJUST_BYPASS_WALLS';
+--INSERT INTO DynamicModifiers (ModifierType, CollectionType, EffectType) VALUES 
+--    ('MODIFIER_PLAYER_UNIT_ADJUST_BYPASS_WALLS','COLLECTION_PLAYER_UNITS','EFFECT_ADJUST_UNIT_BYPASS_WALLS');
+
+
 --UPDATE Units Set CanRetreatWhenCaptured = 0 Where CanRetreatWhenCaptured = 1;
  
 -- Scythia ability cut from healing 50 points on kill to 25.
@@ -179,6 +285,7 @@ UPDATE Units SET BuildCharges='4' WHERE UnitType = 'UNIT_MILITARY_ENGINEER';
 UPDATE Units SET Combat='38' WHERE UnitType = 'UNIT_PIKEMAN';
 UPDATE Units SET Combat='48' WHERE UnitType = 'UNIT_NORWEGIAN_BERSERKER';
 UPDATE Units SET Combat='60', Range='2' WHERE UnitType = 'UNIT_MACHINE_GUN';
+UPDATE Units SET Range='2' WHERE UnitType = 'UNIT_CHINESE_CROUCHING_TIGER';
 UPDATE Units SET Combat='90' WHERE UnitType = 'UNIT_MODERN_AT';
 UPDATE Units SET Combat='100' WHERE UnitType = 'UNIT_MODERN_ARMOR';
 -- Remove Aerodome requirement for building planes, still need it for having several available
