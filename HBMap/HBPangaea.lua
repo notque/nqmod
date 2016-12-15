@@ -129,6 +129,7 @@ function GenerateMap()
 		START_MAX_Y = 20,
 		START_CONFIG = startConfig,
 		LAND = true,
+		FORCE_ALL_CIVS_ON_LARGEST_LANDMASS = true,
 	};
 
 	
