@@ -1,3 +1,6 @@
+## Version 5.
+Reverted Districts to vanilla costs.
+
 ## Version 4.
 Pantheons
 Removed goddess of harvest until firaxis fix it or we get dll access to fix it ourselves.
