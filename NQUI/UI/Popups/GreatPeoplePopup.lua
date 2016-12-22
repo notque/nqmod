@@ -627,10 +627,10 @@ function PopulateData( data:table, isPast:boolean )
 			local playerName = "";
 			local isPlayer:boolean = false;
 			if (player:GetID() == localPlayerID) then
-				playerName = playerName .. Locale.Lookup(PlayerConfigurations[player:GetID()]:GetCivilizationShortDescription());
+				playerName = playerName .. Locale.Lookup(PlayerConfigurations[player:GetID()]:GetLeaderName());
 				isPlayer = true;
 			elseif (Players[localPlayerID]:GetDiplomacy():HasMet(player:GetID())) then
-				playerName = playerName .. Locale.Lookup(PlayerConfigurations[player:GetID()]:GetCivilizationShortDescription());
+				playerName = playerName .. Locale.Lookup(PlayerConfigurations[player:GetID()]:GetLeaderName());
 			else
 				playerName = playerName .. Locale.Lookup("LOC_DIPLOPANEL_UNMET_PLAYER");
 			end
@@ -639,6 +639,7 @@ function PopulateData( data:table, isPast:boolean )
 				MaxPlayerInstances	= classInfo.MaxPlayerInstances,
 				NumInstancesEarned	= pGreatPeople:CountPeopleReceivedByPlayer(classID, player:GetID());
 				PlayerName			= playerName,
+				LeaderName			= leaderName,
 				PointsTotal			= player:GetGreatPeoplePoints():GetPointsTotal(classID),
 				PointsPerTurn		= player:GetGreatPeoplePoints():GetPointsPerTurn(classID),
 			};

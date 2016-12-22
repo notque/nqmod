@@ -61,7 +61,7 @@ UPDATE Units SET CostProgressionParam1 = CostProgressionParam1*2 where UnitType 
 --UPDATE Buildings SET Entertainment = "2" WHERE BuildingType = 'BUILDING_PALACE';
  
 -- prevent moon landing making tourism impossible
-UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'PROJECT_COMPLETION_GRANT_CULTURE_BASED_ON_SCIENCE_RATE' and Name = 'Multiplier'; -- Was 10
+UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'PROJECT_COMPLETION_GRANT_CULTURE_BASED_ON_SCIENCE_RATE' and Name = 'Multiplier' ; -- Was 10
  
  --Cities still hurt after being taken. Need to heal
 UPDATE GlobalParameters SET Value = 25 WHERE Name = 'CITY_CAPTURED_DAMAGE_PERCENTAGE'; -- Used to be 50
@@ -170,7 +170,7 @@ UPDATE Units SET Maintenance = Maintenance + 1 WHERE Maintenance = 0 AND NOT Uni
 --UPDATE Units Set CanRetreatWhenCaptured = 0 Where CanRetreatWhenCaptured = 1;
  
 -- Scythia ability cut from healing 50 points on kill to 25.
-UPDATE ModifierArguments Set Value = '25' where ModifierId = 'HEAL_AFTER_DEFEATING_UNIT';
+Update ModifierArguments Set Value = '25' where ModifierId = 'HEAL_AFTER_DEFEATING_UNIT';
  
 UPDATE Units SET PrereqTech='TECH_THE_WHEEL' WHERE UnitType = 'UNIT_SUMERIAN_WAR_CART';
 UPDATE Units SET ZoneOfControl='0' WHERE UnitType = 'UNIT_SCOUT';
@@ -185,7 +185,7 @@ UPDATE Units SET Combat='100' WHERE UnitType = 'UNIT_MODERN_ARMOR';
 UPDATE Units SET PrereqDistrict= null WHERE UnitType = 'UNIT_BIPLANE' or UnitType = 'UNIT_FIGHTER' or  UnitType = 'UNIT_AMERICAN_P51' or UnitType = 'UNIT_JET_FIGHTER';
 -- Make intercepting anti air, actually intercept
 UPDATE Units SET AntiAirCombat=AntiAirCombat+15 where AntiAirCombat > 0;
-UPDATE Units SET Bombard='95' WHERE UnitType = 'UNIT_JET_BOMBER'; -- was 80, same as bomber
+ UPDATE Units SET Bombard='95' WHERE UnitType = 'UNIT_JET_BOMBER'; -- was 80, same as bomber
 -- Make Unique Units properly replace units
 INSERT INTO UnitReplaces (CivUniqueUnitType, ReplacesUnitType) VALUES ('UNIT_SUMERIAN_WAR_CART', 'UNIT_HEAVY_CHARIOT');
 INSERT INTO UnitReplaces (CivUniqueUnitType, ReplacesUnitType) VALUES ('UNIT_INDIAN_VARU', 'UNIT_KNIGHT');
@@ -252,13 +252,13 @@ UPDATE Routes SET
     WHERE RouteType='ROUTE_MODERN_ROAD';
  
 -- Make the area adjacent to an Oasis worth settling
-INSERT INTO Feature_AdjacentYields (FeatureType, YieldType, YieldChange) VALUES ('FEATURE_OASIS', 'YIELD_FOOD', '1');
-INSERT INTO Feature_AdjacentYields (FeatureType, YieldType, YieldChange) VALUES ('FEATURE_OASIS', 'YIELD_GOLD', '1');
-INSERT INTO Feature_AdjacentYields (FeatureType, YieldType, YieldChange) VALUES ('FEATURE_OASIS', 'YIELD_FAITH', '1');
+INSERT INTO Feature_AdjacentYields (FeatureType, YieldType, YieldChange) VALUES ('FEATURE_OASIS', 'YIELD_FOOD', '1') ;
+INSERT INTO Feature_AdjacentYields (FeatureType, YieldType, YieldChange) VALUES ('FEATURE_OASIS', 'YIELD_GOLD', '1') ;
+INSERT INTO Feature_AdjacentYields (FeatureType, YieldType, YieldChange) VALUES ('FEATURE_OASIS', 'YIELD_FAITH', '1') ;
  
 -- Make fishing boats suck less by adding 1 extra Gold
  
-UPDATE Improvement_YieldChanges SET YieldChange='1' WHERE ImprovementType='IMPROVEMENT_FISHING_BOATS' AND YieldType='YIELD_GOLD';
+UPDATE Improvement_YieldChanges SET YieldChange='1' WHERE ImprovementType='IMPROVEMENT_FISHING_BOATS' AND YieldType='YIELD_GOLD' ;
  
  
  

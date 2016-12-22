@@ -334,6 +334,7 @@ function SelectInPlot( plotX:number, plotY:number )
 	end
 
 	-- If there are units to try selecting...
+	print("Slect Units BIATCH!!")
 	if table.count(kUnitList) ~= 0 then		
 		-- Get any currently selected unit so we can cycle to the next.
 		local iSelected:number = GetCurrentlySelectUnitIndex(kUnitList, eLocalPlayer);
@@ -979,11 +980,11 @@ function DefaultKeyUpHandler( uiKey:number )
   
   local keyPanChanged :boolean = false;
     if uiKey == Keys.VK_ALT then
-    if m_isALTDown == true then
-      m_isALTDown = false;
-      EndDragMap();
-      ReadyForDragMap();
-    end
+	    if m_isALTDown == true then
+	      m_isALTDown = false;
+	      EndDragMap();
+	      ReadyForDragMap();
+	    end
     end
 
     if( uiKey == Keys.VK_UP or uiKey == Keys.W ) then
@@ -1124,6 +1125,7 @@ end
 
 -- ===========================================================================
 function OnMouseSelectionEnd( pInputStruct:table )
+	
 	-- If a drag was occurring, end it; otherwise attempt selection of whatever
 	-- is in the plot the mouse is currently at.
 	if m_isMouseDragging then
@@ -2748,7 +2750,7 @@ end
 --	eNewMode, new mode the engine has just changed to
 -- ===========================================================================
 function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )
-
+	print("WorldInput MC");
 	-- Optional: function run before a mode is exited.
 	local pOldModeHandler :table = InterfaceModeMessageHandler[eOldMode];
 	if pOldModeHandler then

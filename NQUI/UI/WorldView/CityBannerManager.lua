@@ -109,6 +109,7 @@ hstructure CityBanner
 	m_CityGrew						: boolean;
 	m_BannerTurn					: number;
 	m_BannerPop						: number;
+	m_RangedAttack					: number;
 end
 
 
@@ -275,6 +276,7 @@ function CityBanner.Initialize( self : CityBanner, playerID: number, cityID : nu
 	self.m_CityGrew = true;
 	self.m_BannerPop = 0;
 	self.m_BannerTurn = 0;
+	self.m_RangedAttack = 0;
 
 	self:UpdateName();
 	self:UpdatePosition();
@@ -730,7 +732,6 @@ function CityBanner.SetColor( self : CityBanner )
 	end
 
 	self:SetHealthBarColor();
-
 end
 
 -- ===========================================================================
@@ -789,6 +790,7 @@ function CityBanner.UpdateStats( self : CityBanner)
 					if (self.m_BannerPop < currentPopulation) then
 						--self.m_Instance.CityGrew:SetHide(false);
 						self.m_Instance.PopGrowContainer:SetHide(false);
+						
 						--self.m_CityGrew = true;
 						self.m_BannerPop = currentPopulation;
 					else
@@ -1068,6 +1070,7 @@ end
 -- ===========================================================================
 function OnCityBannerClick( playerID:number, cityID:number )
 	local pPlayer = Players[playerID];
+
 	if (pPlayer == nil) then
 		return;
 	end
@@ -1793,20 +1796,24 @@ function CityBanner.UpdateRangeStrike( self : CityBanner)
 	local pDistrict:table = self:GetDistrict();
 	if pDistrict ~= nil and self:IsTeam() then
 		if (self.m_Player:GetID() == Game.GetLocalPlayer() and CanRangeAttack(pDistrict) ) then
-			controls.CityAttackContainer:SetHide(false);				
+			controls.CityAttackContainer:SetHide(false);			
 		else
 			controls.CityAttackContainer:SetHide(true);
+			self.m_RangedAttack = 0;
 		end
 	else
 		-- are we looking at an Improvement miniBanner (Airstrip)?
 		-- if so, just hide the attack container
 		controls.CityAttackContainer:SetHide(true);
+		self.m_RangedAttack = 0;
 	end
 end
 
 -- ===========================================================================
 function OnCityRangeStrikeButtonClick( playerID, cityID )
 	local pPlayer = Players[playerID];
+	local banner = GetCityBanner(playerID, cityID);
+	print("Ranged Clicked");
 	if (pPlayer == nil) then
 		return;
 	end
@@ -1815,9 +1822,20 @@ function OnCityRangeStrikeButtonClick( playerID, cityID )
 	if (pCity == nil) then
 		return;
 	end;
-	
-	UI.SelectCity( pCity );
-	UI.SetInterfaceMode(InterfaceModeTypes.CITY_RANGE_ATTACK);
+
+	local pSelectedCity:table = UI.GetHeadSelectedCity()
+	local pSelectedCityID = 0;
+
+	if (pSelectedCity ~= nil) then
+		pSelectedCityID = pSelectedCity:GetID();
+	end
+
+	if (pSelectedCityID == cityID) then
+		UI.SetInterfaceMode(InterfaceModeTypes.CITY_RANGE_ATTACK);
+	else
+		UI.SelectCity( pCity , false);
+		banner.m_RangedAttack = 1;
+	end
 end
 
 -- ===========================================================================
@@ -1832,7 +1850,9 @@ function OnDistrictRangeStrikeButtonClick( playerID, districtID )
 		return;
 	end;
 	
+	print("District Attack", districtID);
 	UI.DeselectAll();
+	UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);
 	UI.SelectDistrict(pDistrict);
 	UI.SetInterfaceMode(InterfaceModeTypes.DISTRICT_RANGE_ATTACK);
 end
@@ -1912,7 +1932,7 @@ function OnDistrictAddedToMap( playerID: number, districtID : number, cityID :nu
 					if (cityBanner ~= nil) then
 						cityBanner.m_DistrictID = districtID;
 						cityBanner:UpdateRangeStrike();
-						cityBanner:UpdateStats();
+						cityBanner:UpdateStats(); 
 						cityBanner:SetColor();
 					end
 				else
@@ -2035,7 +2055,7 @@ end
 
 -- ===========================================================================
 function OnCityOccupationChanged( playerID: number, cityID : number )
-	RefreshBanner( playerID, cityID );
+	Banner( playerID, cityID );
 end
 
 -- ===========================================================================
@@ -2765,8 +2785,16 @@ function OnSelectionChanged(owner, ID, i, j, k, bSelected, bEditable)
 		banner.m_IsSelected = bSelected;
 		banner:SetColor();
 	end
+
+	print("Selection Changed");
+	if (banner.m_RangedAttack == 1) then
+		print("Enable Ranged Attack Stage 1")
+		banner.m_RangedAttack = 2;
+		UI.SetInterfaceMode(InterfaceModeTypes.CITY_RANGE_ATTACK);
+	end
 end
 
+-- ===========================================================================
 function OnCameraUpdate( vFocusX:number, vFocusY:number, fZoomLevel:number )
 
 	-- If no change in the zoom, no update necessary.
@@ -2783,6 +2811,7 @@ end
 
 -- ===========================================================================
 function OnInterfaceModeChanged( oldMode:number, newMode:number )
+	print("Interface Mode Changed", oldMode, newMode);
 	if newMode == InterfaceModeTypes.MAKE_TRADE_ROUTE then
 		-- Show trading post icons on cities that contain a trading post with the local player
 		local localPlayerID:number = Game.GetLocalPlayer();
@@ -2813,6 +2842,16 @@ function OnInterfaceModeChanged( oldMode:number, newMode:number )
 					banner.m_Instance.CityNameStack:CalculateSize();
 					banner.m_Instance.CityNameStack:ReprocessAnchoring();
 				end
+			end
+		end
+	end
+
+	for _, playerBannerInstances in pairs(CityBannerInstances) do
+		for id, banner in pairs(playerBannerInstances) do
+			if (banner.m_RangedAttack == 2) then
+				print("Enable Ranged Attack Stage 2")
+				banner.m_RangedAttack = 0;
+				UI.SetInterfaceMode(InterfaceModeTypes.CITY_RANGE_ATTACK);
 			end
 		end
 	end
@@ -2878,6 +2917,8 @@ function Initialize()
 	Events.CitySiegeStatusChanged.Add(			OnSiegeStatusChanged);
 
 	LuaEvents.GameDebug_Return.Add(OnGameDebugReturn);
+	LuaEvents.UpdateBanner.Add(RefreshBanner);
+	LuaEvents.UpdateAllBanners.Add(RefreshPlayerBanners);
 end
 Initialize();
 

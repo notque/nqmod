@@ -49,6 +49,11 @@ function OnClickCitizen( plotId:number )
 	tParameters[CityCommandTypes.PARAM_Y] = kPlot:GetY();
 
 	local tResults :table = CityManager.RequestCommand( pSelectedCity, CityCommandTypes.MANAGE, tParameters );
+
+	--update city banner
+	--print("Updating Banner Details");
+	--LuaEvents.UpdateBanner(Game.GetLocalPlayer(), pSelectedCity:GetID());
+
 	return true;
 end
 
@@ -461,6 +466,10 @@ function OnPlotYieldChanged(x, y)
 	if plot ~= nil then
 		table.insert(m_PlotYieldsChanged, plot:GetIndex());
 	end
+
+	--update city banner details
+	print("Updating City Banners");
+	LuaEvents.UpdateAllBanners(Game.GetLocalPlayer());
 end
 
 -- ===========================================================================

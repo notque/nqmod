@@ -45,7 +45,7 @@ DefaultMessageHandler[KeyEvents.KeyUp] =
 	function( pInputStruct:table )
 	
 		local uiKey = pInputStruct:GetKey();
-
+		print("Key: ", uiKey)
         if( uiKey == Keys.VK_ESCAPE ) then		
 			if( Controls.TopOptionsMenu:IsHidden() ) then
 				OpenInGameOptionsMenu();
@@ -66,6 +66,10 @@ DefaultMessageHandler[KeyEvents.KeyUp] =
 			else
 				BulkHide(false, "Forced" );
 			end
+		elseif ( uiKey == 62) then
+			LuaEvents.TopPanel_OpenDemosScreen();
+		elseif ( uiKey == Keys.L) then
+			LuaEvents.PartialScreenHooks_OpenNotificationLog();
 		end
 
 		return false;

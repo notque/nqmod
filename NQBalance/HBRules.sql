@@ -4,26 +4,27 @@
 -----------------------------------------------
  
 -- First attempt (yes, that's +10, not * 10)
-UPDATE Technologies     SET Cost = Cost + 10	WHERE EraType ='ERA_ANCIENT';
-UPDATE Technologies     SET Cost = Cost * 1.25  WHERE EraType ='ERA_CLASSICAL';
-UPDATE Technologies     SET Cost = Cost * 1.25  WHERE EraType ='ERA_MEDIEVAL';
-UPDATE Technologies     SET Cost = Cost * 1.75  WHERE EraType ='ERA_RENAISSANCE';
-UPDATE Technologies     SET Cost = Cost * 1.75  WHERE EraType ='ERA_INDUSTRIAL';
-UPDATE Technologies     SET Cost = Cost * 2    	WHERE EraType ='ERA_MODERN';
-UPDATE Technologies     SET Cost = Cost * 2    	WHERE EraType ='ERA_ATOMIC';
-UPDATE Technologies     SET Cost = Cost * 2.25  WHERE EraType ='ERA_INFORMATION';
+--UPDATE Technologies		SET Cost = 1135 WHERE TechnologyType = 'TECH_REPLACEABLE_PARTS';
+UPDATE Technologies     SET Cost = round(Cost + 10)		WHERE EraType ='ERA_ANCIENT';
+UPDATE Technologies     SET Cost = round(Cost * 1.10)  	WHERE EraType ='ERA_CLASSICAL';
+UPDATE Technologies     SET Cost = round(Cost * 1.20)	WHERE EraType ='ERA_MEDIEVAL';
+UPDATE Technologies     SET Cost = round(Cost * 1.30)  	WHERE EraType ='ERA_RENAISSANCE';
+UPDATE Technologies     SET Cost = round(Cost * 1.35)  	WHERE EraType ='ERA_INDUSTRIAL';
+UPDATE Technologies     SET Cost = round(Cost * 1.40)  	WHERE EraType ='ERA_MODERN';
+UPDATE Technologies     SET Cost = round(Cost * 1.45)   WHERE EraType ='ERA_ATOMIC';
+UPDATE Technologies     SET Cost = round(Cost * 1.50)  	WHERE EraType ='ERA_INFORMATION';
  
 -- First attempt (yes, that's +10, not * 10)
-UPDATE Civics     SET Cost = Cost + 10    WHERE EraType ='ERA_ANCIENT' AND CivicType <> 'CIVIC_CODE_OF_LAWS';
-UPDATE Civics     SET Cost = Cost * 1.25  WHERE EraType ='ERA_CLASSICAL';
-UPDATE Civics     SET Cost = Cost * 1.25  WHERE EraType ='ERA_MEDIEVAL';
-UPDATE Civics     SET Cost = Cost * 1.75  WHERE EraType ='ERA_RENAISSANCE';
-UPDATE Civics     SET Cost = Cost * 1.75  WHERE EraType ='ERA_INDUSTRIAL';
-UPDATE Civics     SET Cost = Cost * 2     WHERE EraType ='ERA_MODERN';
-UPDATE Civics     SET Cost = Cost * 2     WHERE EraType ='ERA_ATOMIC';
-UPDATE Civics     SET Cost = Cost * 2.25  WHERE EraType ='ERA_INFORMATION';
+UPDATE Civics     SET Cost = round(Cost + 10)    WHERE EraType ='ERA_ANCIENT' AND CivicType <> 'CIVIC_CODE_OF_LAWS';
+UPDATE Civics     SET Cost = round(Cost * 1.10)  WHERE EraType ='ERA_CLASSICAL';
+UPDATE Civics     SET Cost = round(Cost * 1.20)  WHERE EraType ='ERA_MEDIEVAL';
+UPDATE Civics     SET Cost = round(Cost * 1.30)  WHERE EraType ='ERA_RENAISSANCE';
+UPDATE Civics     SET Cost = round(Cost * 1.35)  WHERE EraType ='ERA_INDUSTRIAL';
+UPDATE Civics     SET Cost = round(Cost * 1.40)  WHERE EraType ='ERA_MODERN';
+UPDATE Civics     SET Cost = round(Cost * 1.45)  WHERE EraType ='ERA_ATOMIC';
+UPDATE Civics     SET Cost = round(Cost * 1.50)  WHERE EraType ='ERA_INFORMATION';
 
-UPDATE Technologies SET Cost = (Cost * 1.5) WHERE
+UPDATE Technologies SET Cost = round(Cost * 1.5) WHERE
 	TechnologyType = 'TECH_ROBOTICS' or 
 	TechnologyType = 'TECH_NUCLEAR_FUSION' or 
 	TechnologyType = 'TECH_NANOTECHNOLOGY' or

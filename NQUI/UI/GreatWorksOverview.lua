@@ -94,7 +94,11 @@ end
 --	Called every time screen is shown
 -- ===========================================================================
 function UpdateGreatWorks()
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 	m_FirstGreatWork = nil;
 	m_GreatWorkSelected = nil;
 	m_GreatWorkSlotsIM:ResetInstances();
@@ -112,6 +116,10 @@ function UpdateGreatWorks()
 	local numGreatWorks:number = 0;
 	local numDisplaySpaces:number = 0;
 
+<<<<<<< HEAD
+	local tempGreatWorkBuildings:table = {};
+=======
+>>>>>>> refs/remotes/origin/master
 	local pCities:table = m_LocalPlayer:GetCities();
 	for i, pCity in pCities:Members() do
 		if pCity ~= nil and pCity:GetOwner() == m_LocalPlayerID then
@@ -122,17 +130,38 @@ function UpdateGreatWorks()
 				if(pCityBldgs:HasBuilding(buildingIndex)) then
 					local numSlots:number = pCityBldgs:GetNumGreatWorkSlots(buildingIndex);
 					if (numSlots ~= nil and numSlots > 0) then
+<<<<<<< HEAD
+						table.insert(tempGreatWorkBuildings, {Building=buildingInfo,  City=pCity, Type=buildingType, Index=buildingIndex, CityBldgs=pCityBldgs});
+=======
 						local instance:table = m_GreatWorkSlotsIM:GetInstance();
 						local greatWorks:number = PopulateGreatWorkSlot(instance, pCity, pCityBldgs, buildingInfo);
 						table.insert(m_GreatWorkBuildings, {Instance=instance, Type=buildingType, Index=buildingIndex, CityBldgs=pCityBldgs});
 						numDisplaySpaces = numDisplaySpaces + pCityBldgs:GetNumGreatWorkSlots(buildingIndex);
 						numGreatWorks = numGreatWorks + greatWorks;
+>>>>>>> refs/remotes/origin/master
 					end
 				end
 			end
 		end
 	end
 
+<<<<<<< HEAD
+	table.sort(tempGreatWorkBuildings, function(a, b)
+				return a.Type  < b.Type ;
+	end);
+
+	for _:number, gwBuilding:table in ipairs(tempGreatWorkBuildings) do
+			local instance:table = m_GreatWorkSlotsIM:GetInstance();
+			local greatWorks:number = PopulateGreatWorkSlot(instance, gwBuilding.City, gwBuilding.CityBldgs, gwBuilding.Building);
+			numDisplaySpaces = numDisplaySpaces + gwBuilding.CityBldgs:GetNumGreatWorkSlots(buildingIndex);
+			numGreatWorks = numGreatWorks + greatWorks;
+			table.insert(m_GreatWorkBuildings, {Instance=instance, Type=gwBuilding.Type, Index=gwBuilding.Index, CityBldgs=gwBuilding.CityBldgs});
+	end
+
+
+
+=======
+>>>>>>> refs/remotes/origin/master
 	Controls.NumGreatWorks:SetText(numGreatWorks);
 	Controls.NumDisplaySpaces:SetText(numDisplaySpaces);
 
@@ -166,7 +195,11 @@ function UpdateGreatWorks()
 end
 
 function PopulateGreatWorkSlot(instance:table, pCity:table, pCityBldgs:table, pBuildingInfo:table)
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 	instance.DefaultBG:SetHide(false);
 	instance.DisabledBG:SetHide(true);
 	instance.HighlightedBG:SetHide(true);
@@ -216,7 +249,11 @@ function PopulateGreatWorkSlot(instance:table, pCity:table, pCityBldgs:table, pB
 					numThemedGreatWorks = numThemedGreatWorks + 1;
 				end
 			end
+<<<<<<< HEAD
+		end
+=======
 		end                            
+>>>>>>> refs/remotes/origin/master
 
 		if firstGreatWork ~= nil and themeDescription ~= nil then
 			local slotTypeIcon:string = "ICON_" .. firstGreatWork.GreatWorkObjectType;
@@ -327,7 +364,11 @@ function GreatWorkFitsTheme(pCityBldgs:table, pBuildingInfo:table, greatWorkInde
 
 	local firstGreatWorkObjectTypeID:number = pCityBldgs:GetGreatWorkTypeFromIndex(firstGreatWork);
 	local firstGreatWorkObjectType:string = GameInfo.GreatWorks[firstGreatWorkObjectTypeID].GreatWorkObjectType;
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 	if pCityBldgs:IsBuildingThemedCorrectly(GameInfo.Buildings[pBuildingInfo.BuildingType].Index) then
 		return true;
 	else
@@ -350,7 +391,11 @@ function GreatWorkFitsTheme(pCityBldgs:table, pBuildingInfo:table, greatWorkInde
 				else
 					local greatWorkPlayer:number = Game.GetGreatWorkPlayer(greatWorkIndex);
 					local greatWorks:table = GetGreatWorksInBuilding(pCityBldgs, pBuildingInfo);
+<<<<<<< HEAD
+
+=======
 					
+>>>>>>> refs/remotes/origin/master
 					-- Find duplicates for theming description
 					local hash:table = {}
 					local duplicates:table = {}
@@ -373,7 +418,11 @@ end
 function GetGreatWorkIcon(greatWorkInfo:table)
 
 	local greatWorkIcon:string;
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 	if greatWorkInfo.GreatWorkObjectType == GREAT_WORK_ARTIFACT_TYPE then
 		local greatWorkType:string = greatWorkInfo.GreatWorkType;
 		greatWorkType = greatWorkType:gsub("GREATWORK_ARTIFACT_", "");
@@ -407,7 +456,11 @@ function GetThemeDescription(buildingType:string)
 			if row.BuildingType == buildingType then
 				if row.ThemingBonusDescription ~= nil then
 					return Locale.Lookup(row.ThemingBonusDescription);
+<<<<<<< HEAD
+				end
+=======
 				end		
+>>>>>>> refs/remotes/origin/master
 			end
 		end
 	end
@@ -415,7 +468,11 @@ function GetThemeDescription(buildingType:string)
 end
 
 function PopulateGreatWork(instance:table, pCityBldgs:table, pBuildingInfo:table, slotIndex:number, greatWorkIndex:number, slotType:string)
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 	local buildingIndex:number = pBuildingInfo.Index;
 	local slotTypeIcon:string = DEFAULT_GREAT_WORKS_ICONS[slotType];
 	local textureOffsetX:number, textureOffsetY:number, textureSheet:string = IconManager:FindIconAtlas(slotTypeIcon, SIZE_SLOT_TYPE_ICON);
@@ -424,7 +481,11 @@ function PopulateGreatWork(instance:table, pCityBldgs:table, pBuildingInfo:table
 	else
 		instance.SlotTypeIcon:SetTexture(textureOffsetX, textureOffsetY, textureSheet);
 	end
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 	if greatWorkIndex == -1 then
 		instance.GreatWorkIcon:SetHide(true);
 
@@ -456,7 +517,11 @@ function PopulateGreatWork(instance:table, pCityBldgs:table, pBuildingInfo:table
 		end
 	end
 	instance.EmptySlotHighlight:SetHide(true);
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 end
 
 -- IMPORTANT: This logic is largely duplicated in GreatWorkFitsTheme() - if you make an update here, make sure to update that function as well
@@ -472,12 +537,16 @@ function GetGreatWorkTooltip(pCityBldgs:table, greatWorkIndex:number, greatWorkT
 	local yieldValue:number = GameInfo.GreatWork_YieldChanges[greatWorkInfo.GreatWorkType].YieldChange;
 	local greatWorkYields:string = YIELD_FONT_ICONS[yieldType] .. yieldValue .. " " .. YIELD_FONT_ICONS[DATA_FIELD_TOURISM_YIELD] .. greatWorkInfo.Tourism;
 	local buildingName:string = Locale.Lookup(GameInfo.Buildings[pBuildingInfo.BuildingType].Name);
+<<<<<<< HEAD
+
+=======
 	
 	local trimmedGreatWorkCreator = greatWorkCreator:gsub("%s+", "");
 	if (trimmedGreatWorkCreator == "") then
 		greatWorkCreator = Locale.Lookup("LOC_CIVILIZATION_BARBARIAN_DESCRIPTION");
 	end
 	
+>>>>>>> refs/remotes/origin/master
 	if greatWorkInfo.EraType ~= nil then
 		greatWorkTypeName = Locale.Lookup("LOC_" .. greatWorkInfo.GreatWorkObjectType .. "_" .. greatWorkInfo.EraType);
 	else
@@ -498,7 +567,11 @@ function GetGreatWorkTooltip(pCityBldgs:table, greatWorkIndex:number, greatWorkT
 
 		local firstGreatWorkObjectTypeID:number = pCityBldgs:GetGreatWorkTypeFromIndex(firstGreatWork);
 		local firstGreatWorkObjectType:string = GameInfo.GreatWorks[firstGreatWorkObjectTypeID].GreatWorkObjectType;
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> refs/remotes/origin/master
 		if pCityBldgs:IsBuildingThemedCorrectly(GameInfo.Buildings[pBuildingInfo.BuildingType].Index) then
 			themeText = Locale.Lookup("LOC_GREAT_WORKS_ART_MATCHED_THEME", buildingName);
 		else
@@ -530,7 +603,11 @@ function GetGreatWorkTooltip(pCityBldgs:table, greatWorkIndex:number, greatWorkT
 					else
 						local greatWorkPlayer:number = Game.GetGreatWorkPlayer(greatWorkIndex);
 						local greatWorks:table = GetGreatWorksInBuilding(pCityBldgs, pBuildingInfo);
+<<<<<<< HEAD
+
+=======
 						
+>>>>>>> refs/remotes/origin/master
 						-- Find duplicates for theming description
 						local hash:table = {}
 						local duplicates:table = {}
@@ -550,7 +627,11 @@ function GetGreatWorkTooltip(pCityBldgs:table, greatWorkIndex:number, greatWorkT
 				end
 			end
 		end
+<<<<<<< HEAD
+
+=======
 		
+>>>>>>> refs/remotes/origin/master
 		if themeText ~= nil then
 			tooltipText = tooltipText .. "[NEWLINE][NEWLINE]" .. themeText;
 		end
@@ -631,10 +712,17 @@ function OnClickGreatWork(greatWorkIcon:table, pCityBldgs:table, buildingIndex:n
 		end
 		return;
 	end
+<<<<<<< HEAD
+
+	-- TODO: Check to make sure player can move this great work
+	greatWorkIcon:SetHide(true);
+
+=======
 	
 	-- TODO: Check to make sure player can move this great work
 	greatWorkIcon:SetHide(true);
 	
+>>>>>>> refs/remotes/origin/master
 	local greatWorkType:number = pCityBldgs:GetGreatWorkTypeFromIndex(greatWorkIndex);
 	local textureOffsetX:number, textureOffsetY:number, textureSheet:string = GetGreatWorkIcon(GameInfo.GreatWorks[greatWorkType]);
 	Controls.MovingIcon:SetTexture(textureOffsetX, textureOffsetY, textureSheet);
@@ -773,7 +861,11 @@ function CanMoveGreatWork(srcBldgs:table, srcBuilding:number, srcSlot:number, ds
 
 				local dstGreatWorkType:number = dstBldgs:GetGreatWorkTypeFromIndex(dstGreatWork);
 				local dstGreatWorkObjectType:string = GameInfo.GreatWorks[dstGreatWorkType].GreatWorkObjectType;
+<<<<<<< HEAD
+
+=======
 				
+>>>>>>> refs/remotes/origin/master
 				for row in GameInfo.GreatWork_ValidSubTypes() do
 					if srcSlotTypeString == row.GreatWorkSlotType and dstGreatWorkObjectType == row.GreatWorkObjectType then
 						return true;
@@ -795,7 +887,11 @@ function OnClickSlot(pCityBldgs:table, buildingIndex:number, slotIndex:number)
 
 	m_dest_building = buildingIndex;
     m_dest_city = pCityBldgs:GetCity():GetID();
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 	local tParameters = {};
 	tParameters[PlayerOperations.PARAM_PLAYER_ONE] = Game.GetLocalPlayer();
 	tParameters[PlayerOperations.PARAM_CITY_SRC] = m_GreatWorkSelected.CityBldgs:GetCity():GetID();
@@ -967,7 +1063,11 @@ end
 --	INIT
 -- ===========================================================================
 function Initialize()
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> refs/remotes/origin/master
 	ContextPtr:SetInitHandler(OnInit);
 	ContextPtr:SetShutdown(OnShutdown);
 	ContextPtr:SetInputHandler(OnInputHandler, true);

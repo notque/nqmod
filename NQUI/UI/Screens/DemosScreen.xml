@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\..\..\CivTech\Libs\ForgeUI\ForgeUI_Assets\Controls.xsd">
+
+	<Container Style="FullScreenVignetteConsumer" ConsumeAllMouse="0" ConsumeMouseButton="1" ConsumeMouseWheel="1" ConsumeMouseOver="1"/>
+
+	<Box ID="Main" Anchor="C,C" Size="1024,650" Color="11,27,40,255">
+		<Container Anchor="C,C" Size="1024,650" >
+			<Image ID="ModalBG" Size="1024,768" ConsumeMouseButton="1" ConsumeMouseWheel="1"/>
+			<Image Size="parent,40"	Texture="Controls_SubHeader2"   />
+			<Grid Offset="-5,-5" Size="parent+10,parent+10"	Style="WindowFrameAlpha"/>
+			<Label ID="ModalScreenTitle" Anchor="C,T" Offset="0,5" Style="FontFlair28" FontStyle="glow" Color="206,218,225,255" EffectColor="74,108,37,191" />
+			<Button ID="ModalScreenClose" Anchor="R,T" Style="CloseButtonSmall" Offset="0,0" />
+			
+			<Label ID="DemoHeader" Offset="25,80" Style="FontNormal22" FontStyle="glow" Color0="208,212,217,255" Color1="16,43,67,100" String="Demographic"/>
+			<Label ID="RankHeader" Offset="200,80" Style="FontNormal22" FontStyle="glow" Color0="208,212,217,255" Color1="16,43,67,100" String="Rank"/>
+			<Label ID="ValueHeader" Offset="350,80" Style="FontNormal22" FontStyle="glow" Color0="208,212,217,255" Color1="16,43,67,100" String="Value"/>
+			<Label ID="BestHeader" Offset="500,80" Style="FontNormal22" FontStyle="glow" Color0="208,212,217,255" Color1="16,43,67,100" String="Best"/>
+			<Label ID="AvgHeader" Offset="700,80" Style="FontNormal22" FontStyle="glow" Color0="208,212,217,255" Color1="16,43,67,100" String="Average"/>
+			<Label ID="WorstHeader" Offset="900,80" Style="FontNormal22" FontStyle="glow" Color0="208,212,217,255" Color1="16,43,67,100" String="Lowest"/>
+
+			<Grid Style="DividerGrid" Offset="5,105" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoPop" Offset="25,127" Style="ButtonFont16" String="Population"/>
+			<Label ID="RankPop" Offset="200,127" Style="ButtonFont16" String="1"/>
+			<Label ID="ValuePop" Offset="350,127" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestPop" Offset="460,115" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestPop" Offset="460,115" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestPop" Offset="500,127" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgPop" Offset="700,127" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstPop" Offset="860,115" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstPop" Offset="860,115" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstPop" Offset="900,127" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,155" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoCrop" Offset="25,177" Style="ButtonFont16" String="Crop Yield"/>
+			<Label ID="RankCrop" Offset="200,177" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueCrop" Offset="350,177" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestCrop" Offset="460,165" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestCrop" Offset="460,165" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestCrop" Offset="500,177" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgCrop" Offset="700,177" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstCrop" Offset="860,165" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstCrop" Offset="860,165" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstCrop" Offset="900,177" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,205" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoProd" Offset="25,227" Style="ButtonFont16" String="Manufactured Goods"/>
+			<Label ID="RankProd" Offset="200,227" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueProd" Offset="350,227" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestProd" Offset="460,215" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestProd" Offset="460,215" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestProd" Offset="500,227" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgProd" Offset="700,227" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstProd" Offset="860,215" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstProd" Offset="860,215" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstProd" Offset="900,227" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,255" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoGNP" Offset="25,277" Style="ButtonFont16" String="GNP"/>
+			<Label ID="RankGNP" Offset="200,277" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueGNP" Offset="350,277" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestGNP" Offset="460,265" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestGNP" Offset="460,265" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestGNP" Offset="500,277" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgGNP" Offset="700,277" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstGNP" Offset="860,265" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstGNP" Offset="860,265" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstGNP" Offset="900,277" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,305" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoArmy" Offset="25,327" Style="ButtonFont16" String="Military Strength"/>
+			<Label ID="RankArmy" Offset="200,327" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueArmy" Offset="350,327" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestArmy" Offset="460,315" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestArmy" Offset="460,315" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestArmy" Offset="500,327" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgArmy" Offset="700,327" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstArmy" Offset="860,315" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstArmy" Offset="860,315" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstArmy" Offset="900,327" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,355" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoFaith" Offset="25,377" Style="ButtonFont16" String="Faith"/>
+			<Label ID="RankFaith" Offset="200,377" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueFaith" Offset="350,377" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestFaith" Offset="460,365" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestFaith" Offset="460,365" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestFaith" Offset="500,377" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgFaith" Offset="700,377" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstFaith" Offset="860,365" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstFaith" Offset="860,365" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstFaith" Offset="900,377" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,405" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoTour" Offset="25,427" Style="ButtonFont16" String="Tourism"/>
+			<Label ID="RankTour" Offset="200,427" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueTour" Offset="350,427" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestTour" Offset="460,415" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestTour" Offset="460,415" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestTour" Offset="500,427" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgTour" Offset="700,427" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstTour" Offset="860,415" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstTour" Offset="860,415" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstTour" Offset="900,427" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,455" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoHappy" Offset="25,477" Style="ButtonFont16" String="Happiness"/>
+			<Label ID="RankHappy" Offset="200,477" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueHappy" Offset="350,477" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestHappy" Offset="460,465" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestHappy" Offset="460,465" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestHappy" Offset="500,477" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgHappy" Offset="700,477" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstHappy" Offset="860,465" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstHappy" Offset="860,465" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstHappy" Offset="900,477" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,505" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoCivics" Offset="25,527" Style="ButtonFont16" String="Culture"/>
+			<Label ID="RankCivics" Offset="200,527" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueCivics" Offset="350,527" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestCivics" Offset="460,515" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestCivics" Offset="460,515" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestCivics" Offset="500,527" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgCivics" Offset="700,527" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstCivics" Offset="860,515" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstCivics" Offset="860,515" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstCivics" Offset="900,527" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,555" Size="parent-10,8" Color="47,63,76,255" />
+
+			<Label ID="DemoTech" Offset="25,577" Style="ButtonFont16" String="Science"/>
+			<Label ID="RankTech" Offset="200,577" Style="ButtonFont16" String="1"/>
+			<Label ID="ValueTech" Offset="350,577" Style="ButtonFont16" String="0"/>
+			<Image ID="CivIconBackingBestTech" Offset="460,565" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconBestTech" Offset="460,565" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="BestTech" Offset="500,577" Style="FontNormal16" FontStyle="glow" Color0="0,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Label ID="AvgTech" Offset="700,577" Style="FontNormal16" FontStyle="glow" Color0="255,255,0,255"	Color1="16,43,67,100" String="0"/>
+			<Image ID="CivIconBackingWorstTech" Offset="860,565" Size="36,36" Texture="CircleBacking36" Color="0,0,150,255"/>
+			<Image ID="CivIconWorstTech" Offset="860,565" Size="36,36" Texture="CivSymbols36"/>
+			<Label ID="WorstTech" Offset="900,577" Style="FontNormal16" FontStyle="glow" Color0="255,0,0,255"	Color1="16,43,67,100" String="0"/>
+
+			<Grid Style="DividerGrid" Offset="5,605" Size="parent-10,8" Color="47,63,76,255" />
+		</Container>
+	</Box>
+</Context>

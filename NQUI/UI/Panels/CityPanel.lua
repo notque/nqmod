@@ -681,6 +681,22 @@ function Refresh()
 	local eLocalPlayer :number = Game.GetLocalPlayer();
 	m_pPlayer= Players[eLocalPlayer];
 	m_pCity	 = UI.GetHeadSelectedCity();
+	--local cityX = m_pCity:GetX();
+	--local cityY = m_pCity:GetY();
+	--local plotID = Map.GetPlot(cityX, cityY):GetIndex();
+	--local plotID = pPlot:GetIndex();
+	--print("City Plot ID: " .. plotID);
+
+	--local tParameters	:table = {};
+	--tParameters[CityCommandTypes.PARAM_MANAGE_CITIZEN] = UI.GetInterfaceModeParameter(CityCommandTypes.PARAM_MANAGE_CITIZEN);
+	--tParameters[CityCommandTypes.PARAM_X] = m_pCity:GetX();
+	--tParameters[CityCommandTypes.PARAM_Y] = m_pCity:GetY();
+
+	--local tResults :table = CityManager.RequestCommand( pSelectedCity, CityCommandTypes.MANAGE, tParameters );
+	
+	--OnResetYieldToNormal( YieldTypes.CULTURE,	"Culture");
+	
+	print("Updating City Panel Data");
 
 	if m_pPlayer ~= nil and m_pCity ~= nil then 		
 		m_kData = GetCityData( m_pCity );
@@ -688,6 +704,10 @@ function Refresh()
 			return;
 		end
 		
+		print("=============================================================");
+		print("Updating City Panel Details");
+		print("=============================================================");
+
 		ViewMain( m_kData );
 		
 		-- Tell others (e.g., CityPanelOverview) that the selected city data has changed.
@@ -695,9 +715,54 @@ function Refresh()
 		-- more effecient than recomputing the entire set of yields a second time,
 		-- despite the large size.
 		LuaEvents.CityPanel_LiveCityDataChanged( m_kData, true );
+		LuaEvents.UpdateBanner(Game.GetLocalPlayer(), m_pCity:GetID());
 	end
 end
+-- ===========================================================================
 
+function RefreshOnTurnRoll()
+	print("Turn Roll City Panel Update");
+	local pPlayer = Game.GetLocalPlayer();
+
+	m_pCity	 = UI.GetHeadSelectedCity();
+
+	if m_pCity ~= nil then
+		local pCitizens		:table = m_pCity:GetCitizens();
+		local tParameters	:table = {};
+
+		if pCitizens:IsFavoredYield(YieldTypes.CULTURE) then
+			tParameters[CityCommandTypes.PARAM_FLAGS]		= 0;			-- Set favoured
+			tParameters[CityCommandTypes.PARAM_DATA0] = 1;					-- on
+		elseif pCitizens:IsDisfavoredYield(YieldTypes.CULTURE) then
+			tParameters[CityCommandTypes.PARAM_FLAGS]		= 1;			-- Set Ignored
+			tParameters[CityCommandTypes.PARAM_DATA0] = 1;					-- on
+		else
+			tParameters[CityCommandTypes.PARAM_FLAGS]		= 0;			-- Set favoured
+			tParameters[CityCommandTypes.PARAM_DATA0] = 0;					-- off
+		end
+
+		tParameters[CityCommandTypes.PARAM_YIELD_TYPE]= yieldType;	-- Yield type
+		CityManager.RequestCommand(m_pCity, CityCommandTypes.SET_FOCUS, tParameters);
+
+		m_kData = GetCityData( m_pCity );
+		if m_kData == nil then
+			return;
+		end
+		
+		print("=============================================================");
+		print("Updating City Panel Details Due To Turn Roll");
+		print("=============================================================");
+
+		ViewMain( m_kData );
+
+		-- Tell others (e.g., CityPanelOverview) that the selected city data has changed.
+		-- Passing this large table across contexts via LuaEvent is *much*
+		-- more effecient than recomputing the entire set of yields a second time,
+		-- despite the large size.
+		LuaEvents.CityPanel_LiveCityDataChanged( m_kData, true );
+		LuaEvents.UpdateBanner(Game.GetLocalPlayer(), m_pCity:GetID());
+	end
+end
 
 -- ===========================================================================
 function RefreshIfMatch( ownerPlayerID:number, cityID:number )
@@ -705,7 +770,57 @@ function RefreshIfMatch( ownerPlayerID:number, cityID:number )
 		Refresh();
 	end
 end
+-- ===========================================================================
+function OnTileImproved(x, y)
+	print("A Tile Was Improved!");
+	local plot:table = Map.GetPlot(x,y);
+	local PlayerID = Game.GetLocalPlayer();
+	
+	m_pCity = Cities.GetPlotPurchaseCity(plot);
 
+	print("Player: " .. PlayerID);
+	print("City Owner: " .. m_pCity:GetOwner());
+
+	if (PlayerID == m_pCity:GetOwner()) then
+		print("City: " .. m_pCity:GetID());
+		
+		local pCitizens		:table = m_pCity:GetCitizens();
+		local tParameters	:table = {};
+
+		if pCitizens:IsFavoredYield(YieldTypes.CULTURE) then
+			tParameters[CityCommandTypes.PARAM_FLAGS]		= 0;			-- Set favoured
+			tParameters[CityCommandTypes.PARAM_DATA0] = 1;					-- on
+		elseif pCitizens:IsDisfavoredYield(YieldTypes.CULTURE) then
+			tParameters[CityCommandTypes.PARAM_FLAGS]		= 1;			-- Set Ignored
+			tParameters[CityCommandTypes.PARAM_DATA0] = 1;					-- on
+		else
+			tParameters[CityCommandTypes.PARAM_FLAGS]		= 0;			-- Set favoured
+			tParameters[CityCommandTypes.PARAM_DATA0] = 0;					-- off
+		end
+		
+		tParameters[CityCommandTypes.PARAM_YIELD_TYPE]= yieldType;	-- Yield type
+		CityManager.RequestCommand(m_pCity, CityCommandTypes.SET_FOCUS, tParameters);
+
+		m_kData = GetCityData( m_pCity );
+		--m_kData = GetCityData( m_pCity );
+		if m_kData == nil then
+			return;
+		end
+		
+		print("=============================================================");
+		print("Updating City Panel Details Due To Yield Change");
+		print("=============================================================");
+
+		--ViewMain( m_kData );
+
+		-- Tell others (e.g., CityPanelOverview) that the selected city data has changed.
+		-- Passing this large table across contexts via LuaEvent is *much*
+		-- more effecient than recomputing the entire set of yields a second time,
+		-- despite the large size.
+		LuaEvents.CityPanel_LiveCityDataChanged( m_kData, true );
+		LuaEvents.UpdateBanner(Game.GetLocalPlayer(), m_pCity:GetID());
+	end
+end
 -- ===========================================================================
 --	GAME Event
 -- ===========================================================================
@@ -806,14 +921,14 @@ function OnCitySelectionChanged( ownerPlayerID:number, cityID:number, i:number, 
 			if shouldSwitchToSelection then
 				UI.SetInterfaceMode(InterfaceModeTypes.SELECTION);
 			end
-
+			Refresh();
 			OnToggleOverviewPanel();
 			ContextPtr:SetHide(false);
+			--OnResetYieldToNormal( YieldTypes.CULTURE,	"Culture");
 			Controls.CityPanelAlpha:SetToBeginning();
 			Controls.CityPanelAlpha:Play();
 			Controls.CityPanelSlide:SetToBeginning();
 			Controls.CityPanelSlide:Play();
-			Refresh();
 		else
 			Close();
 			-- Tell the CityPanelOverview a city was deselected
@@ -1153,7 +1268,7 @@ end
 --	eNewMode, new mode the engine has just changed to
 -- ===========================================================================
 function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )	
-	
+	print("CityPanel MC");
 	if eOldMode == InterfaceModeTypes.CITY_MANAGEMENT then
 		if Controls.PurchaseTileCheck:IsChecked()   then Controls.PurchaseTileCheck:SetAndCall( false ); end
 		if Controls.ManageCitizensCheck:IsChecked() then Controls.ManageCitizensCheck:SetAndCall( false ); end
@@ -1177,7 +1292,9 @@ function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )
 	elseif eOldMode == InterfaceModeTypes.CITY_RANGE_ATTACK or eOldMode == InterfaceModeTypes.DISTRICT_RANGE_ATTACK then
 		-- If we leave CITY_RANGE_ATTACK with a city selected then show the city panel again
 		if UI.GetHeadSelectedCity() then
+			Refresh();
 			ContextPtr:SetHide(false);
+			--OnResetYieldToNormal( YieldTypes.CULTURE,	"Culture");
 		end
 	end
 
@@ -1196,7 +1313,9 @@ function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )
 	end
 
 	if not ContextPtr:IsHidden() then
+		Refresh();
 		ViewMain( m_kData );
+		--OnResetYieldToNormal( YieldTypes.CULTURE,	"Culture");
 	end
 end
 
@@ -1342,6 +1461,8 @@ function Initialize()
 	Events.InterfaceModeChanged.Add(	OnInterfaceModeChanged );
 	Events.LocalPlayerChanged.Add(		OnLocalPlayerChanged );
 	Events.UnitSelectionChanged.Add(	OnUnitSelectionChanged );
+	Events.PlotYieldChanged.Add(        OnTileImproved );
+	Events.PlayerTurnActivated.Add( 	RefreshOnTurnRoll );
 
 	-- LUA Events
 	LuaEvents.CityPanelOverview_CloseButton.Add( OnCloseOverviewPanel );
@@ -1349,6 +1470,8 @@ function Initialize()
 	LuaEvents.ProductionPanel_Close.Add( OnProductionPanelClose );
 	LuaEvents.Tutorial_CityPanelOpen.Add( OnTutorialOpen );
 	LuaEvents.Tutorial_ContextDisableItems.Add( OnTutorial_ContextDisableItems );
+
+	LuaEvents.RefreshCityPanel.Add(Refresh);
 
 	-- Truncate possible static text overflows
 	TruncateStringWithTooltip(Controls.BreakdownLabel,	MAX_BEFORE_TRUNC_STATIC_LABELS,	Controls.BreakdownLabel:GetText());

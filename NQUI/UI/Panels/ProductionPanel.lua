@@ -2507,6 +2507,7 @@ function OnCityBannerManagerProductionToggle()
 	if(ContextPtr:IsHidden()) then
 		Open();
 	else
+		Close();
 	end
 end
 

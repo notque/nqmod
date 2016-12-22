@@ -69,6 +69,25 @@ function OnToggleReportsScreen()
 end
 
 -- ===========================================================================
+--	UI Callback
+--	Send signal to open/close the Demos Screen
+-- ===========================================================================
+function OnToggleDemosScreen()
+	local pDemosScreen :table = ContextPtr:LookUpControl( "/InGame/DemosScreen" );
+	if pDemosScreen == nil then
+		UI.DataError("Unable to toggle Demos Screen.  Not found in '/InGame/DemosScreen'.");
+		return;
+	end
+	if pDemosScreen:IsHidden() then
+		print("Show Demos");
+		LuaEvents.TopPanel_OpenDemosScreen();
+	else
+		print("Hide Demos");
+		LuaEvents.TopPanel_CloseDemosScreen();
+	end
+end
+
+-- ===========================================================================
 --	Callback
 -- ===========================================================================
 
@@ -484,6 +503,7 @@ function Initialize()
 	Controls.MenuButton:RegisterCallback( Mouse.eLClick, OnMenu );
 	Controls.MenuButton:RegisterCallback( Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
 	Controls.ViewReports:RegisterCallback( Mouse.eLClick, OnToggleReportsScreen );
+	Controls.Demos:RegisterCallback( Mouse.eLClick, OnToggleDemosScreen );
 
 	-- Game Events
 	Events.AnarchyBegins.Add(				OnRefreshYields );

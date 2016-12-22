@@ -1,0 +1,1 @@
+INSERT INTO LocalizedText (Language, Tag, Text) VALUES ('en_US', 'LOC_TEAM_OBSERVER', 'Observer');

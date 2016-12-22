@@ -82,8 +82,8 @@
 					</Container>
 				</Stack>
 
-				<Image ID="CityAttackContainer" Texture="CityBannerRangeAttackRim" Size="36,45" Anchor="C,B" AnchorSide="I,O" Offset="0,-6">
-					<Button ID="CityRangeStrikeButton" Style="CityBannerRangeAttack" Anchor="C,B" Offset="0,10" StateOffsetIncrement="0,25" ConsumeMouse="1" ToolTip="LOC_CITY_BANNER_CITY_RANGE_STRIKE"/>
+				<Image ID="CityAttackContainer" Texture="CityBannerRangeAttackRim" Size="36,45" Anchor="C,B" AnchorSide="I,O" Offset="0,-90">
+					<Button ID="CityRangeStrikeButton" Style="CityBannerRangeAttack" Anchor="C,B" Offset="0,10" StateOffsetIncrement="0,25" ConsumeMouse="0" ToolTip="LOC_CITY_BANNER_CITY_RANGE_STRIKE"/>
 				</Image>
 
 				<Grid ID="BannerStrengthBacking"  Texture="Banner_StrengthBacking"  Size="55,15"  Anchor="C,T"  SliceTextureSize="42,15"  SliceCorner="21,7"  AnchorSide="I,O" Color="255,255,255,150">
@@ -353,7 +353,7 @@
         </Grid>
 
         <!-- District ranged strike button -->
-        <Image			ID="CityAttackContainer" Texture="CityBannerRangeAttackRim" Size="36,45" Anchor="C,B" Offset="0,-4" AnchorSide="I,O" >
+        <Image			ID="CityAttackContainer" Texture="CityBannerRangeAttackRim" Size="36,45" Anchor="C,T" Offset="0,-75" AnchorSide="I,O" >
           <Button		ID="CityRangeStrikeButton" Style="CityBannerRangeAttack" Anchor="C,B" Offset="0,10" StateOffsetIncrement="0,25" ConsumeMouse="1" ToolTip="LOC_CITY_BANNER_DISTRICT_RANGE_STRIKE"/>
         </Image>
       </Container>

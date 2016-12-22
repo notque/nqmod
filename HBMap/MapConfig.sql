@@ -10,12 +10,22 @@ INSERT INTO Parameters (Key1, Key2, ParameterId, Name, Description, Domain, Defa
 	('Map','HBPangaea.lua','SeaLevel','LOC_MAP_SEA_LEVEL_NAME','LOC_MAP_SEA_LEVEL_LOW_DESCRIPTION','SeaLevel','2','Map','sea_level','MapOptions','0','260'),
 	('Map','HBPangaea.lua','Resources','LOC_MAP_RESOURCES_NAME','LOC_MAP_RESOURCES_DESCRIPTION','Resources','2','Map','resources','MapOptions','0','270'),
 	('Map','HBPangaea.lua','StartPosition','LOC_MAP_START_POSITION_NAME','LOC_MAP_START_POSITION_DESCRIPTION','StartPosition','1','Map','start','MapOptions','0','280'),
-	('Map','HBPangaea.lua','MountDensity','Mountain Density','Amount of mountains on map','MountDensity','2','Map','MountDensity','MapOptions','0','290');
+	('Map','HBPangaea.lua','MountDensity','Mountain Density','Amount of mountains on map','MountDensity','2','Map','MountDensity','MapOptions','0','290'),
+	('Map','HBPangaea.lua','MapPosition','Team Balancing','Balance Teams To STart Near Each Other','MapPosition','1','Map','map_position','MapOptions','0','300'),
+	('Map','HBPangaea.lua','CityStates','City States','Enable or Disable City States','CityStates','1','Map','city_states','MapOptions','0','310');
 
 INSERT INTO DomainValues (Domain, Value, Name, Description, SortIndex) VALUES
 	('MountDensity','1','Sparse','Reduced Number Of Mountains', '10'),
 	('MountDensity','2','Moderate','Normal Amount Of Mountains', '20'),
 	('MountDensity','3','Saturated','Increased Number Of Mountains', '30');
+
+INSERT INTO DomainValues (Domain, Value, Name, Description, SortIndex) VALUES
+	('MapPosition','1','Standard','Normal Start Location Spawning', '10'),
+	('MapPosition','2','Start Together','Teams Start Near Each Other', '20');
+
+INSERT INTO DomainValues (Domain, Value, Name, Description, SortIndex) VALUES
+	('CityStates','1','Enabled','City States Enabled', '10'),
+	('CityStates','2','Disabled','City States Disabled', '20');
 
 UPDATE Parameters SET DefaultValue='HBPangaea.lua' WHERE ParameterId='Map';
 
@@ -29,4 +39,6 @@ INSERT INTO Parameters (Key1, Key2, ParameterId, Name, Description, Domain, Defa
 	('Map','HBOval.lua','SeaLevel','LOC_MAP_SEA_LEVEL_NAME','LOC_MAP_SEA_LEVEL_LOW_DESCRIPTION','SeaLevel','2','Map','sea_level','MapOptions','0','260'),
 	('Map','HBOval.lua','Resources','LOC_MAP_RESOURCES_NAME','LOC_MAP_RESOURCES_DESCRIPTION','Resources','2','Map','resources','MapOptions','0','270'),
 	('Map','HBOval.lua','StartPosition','LOC_MAP_START_POSITION_NAME','LOC_MAP_START_POSITION_DESCRIPTION','StartPosition','1','Map','start','MapOptions','0','280'),
-	('Map','HBOval.lua','MountDensity','Mountain Density','Amount of mountains on map','MountDensity','2','Map','MountDensity','MapOptions','0','290');
+	('Map','HBOval.lua','MountDensity','Mountain Density','Amount of mountains on map','MountDensity','2','Map','MountDensity','MapOptions','0','290'),
+	('Map','HBOval.lua','MapPosition','Team Balancing','Balance Teams To STart Near Each Other','MapPosition','1','Map','map_position','MapOptions','0','300'),
+	('Map','HBOval.lua','CityStates','City States','Enable or Disable City States','CityStates','1','Map','city_states','MapOptions','0','310');

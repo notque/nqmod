@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<GameInfo>
+	<TurnPhases>
+		<Row TurnPhaseType="TURNPHASE_TWOPHASE"		Name="LOC_TURNPHASE_TWOPHASE"		Description="Qs TWO PHASED TURNS"		SortIndex="30" />
+	</TurnPhases>
+</GameInfo>

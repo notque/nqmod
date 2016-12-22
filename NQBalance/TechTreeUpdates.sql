@@ -82,8 +82,8 @@ UPDATE Technologies SET Cost = '660' WHERE TechnologyType = 'TECH_BANKING';
 UPDATE TechnologyPrereqs SET PrereqTech = 'TECH_PRINTING' WHERE Technology = 'TECH_BANKING' AND PrereqTech ='TECH_STIRRUPS';
 
 -- swap electircity and radio and move forward flight
-UPDATE Technologies SET Cost = '1135' WHERE TechnologyType = 'TECH_FLIGHT';
-UPDATE Technologies SET Cost = '1035' WHERE TechnologyType = 'TECH_ELECTRICITY';
+UPDATE Technologies SET Cost = '1250' WHERE TechnologyType = 'TECH_FLIGHT';
+UPDATE Technologies SET Cost = '1140' WHERE TechnologyType = 'TECH_ELECTRICITY';
 
 -- set the new prequiset tech for radio
 UPDATE TechnologyPrereqs SET PrereqTech = 'TECH_ELECTRICITY' WHERE Technology = 'TECH_RADIO' AND PrereqTech ='TECH_FLIGHT';
@@ -108,10 +108,10 @@ INSERT INTO TechnologyPrereqs (Technology, PrereqTech) VALUES ('TECH_ELECTRICITY
 INSERT INTO TechnologyPrereqs (Technology, PrereqTech) VALUES ('TECH_CHEMISTRY', 'TECH_ELECTRICITY');
 
 -- move combustion back 1 tech slot
-UPDATE Technologies SET Cost = '1035' WHERE TechnologyType = 'TECH_COMBUSTION';
+UPDATE Technologies SET Cost = '1140' WHERE TechnologyType = 'TECH_COMBUSTION';
 
 --move steel forwards 1 tech slot
-UPDATE Technologies SET Cost = '1135' WHERE TechnologyType = 'TECH_STEEL';
+UPDATE Technologies SET Cost = '1250' WHERE TechnologyType = 'TECH_STEEL';
 
 -- make steel require combustion
 INSERT INTO TechnologyPrereqs (Technology, PrereqTech) VALUES ('TECH_STEEL', 'TECH_COMBUSTION');
