@@ -51,7 +51,8 @@ UPDATE GlobalParameters SET Value = '10' WHERE Name = 'REBELLION_COOLDOWN_TURNS'
 --Border Expanding
 --UPDATE GlobalParameters SET Value = 5 WHERE Name = 'CULTURE_COST_FIRST_PLOT'; -- was 10
 --UPDATE GlobalParameters SET Value = 1.4 WHERE Name = 'CULTURE_COST_LATER_PLOT_EXPONENT'; -- Used to be 1.3
---UPDATE GlobalParameters SET Value = 3 WHERE Name = 'CULTURE_COST_LATER_PLOT_MULTIPLIER'; -- Used to be 6
+-- Increasing Border Expansion for Online Speed
+UPDATE GlobalParameters SET Value = 3 WHERE Name = 'CULTURE_COST_LATER_PLOT_MULTIPLIER'; -- Used to be 6
 --UPDATE GlobalParameters SET Value = 4 WHERE Name = 'CITY_MIN_RANGE'; -- Used to be 3
  
 UPDATE Units SET CostProgressionParam1 = CostProgressionParam1*2 where UnitType = "UNIT_SETTLER";
@@ -140,7 +141,7 @@ UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVE
 -- Religion
 -----------------------------------------------
 UPDATE GlobalParameters SET Value = 2 WHERE Name = 'RELIGION_SPREAD_ADJACENT_PER_TURN_PRESSURE'; -- Was 1
-UPDATE GlobalParameters SET Value = 100 WHERE Name = 'RELIGION_SPREAD_ATHEISM_PRESSURE_PER_POP'; -- Was 50
+--UPDATE GlobalParameters SET Value = 100 WHERE Name = 'RELIGION_SPREAD_ATHEISM_PRESSURE_PER_POP'; -- Was 50
 UPDATE GlobalParameters SET Value = 400 WHERE Name = 'RELIGION_SPREAD_HOLY_CITY_PRESSURE_PER_POP'; -- Was 200
 UPDATE GlobalParameters SET Value = 8 WHERE Name = 'RELIGION_SPREAD_HOLY_CITY_PRESSURE_MULTIPLIER'; -- Was 4
 UPDATE GlobalParameters SET Value = 4 WHERE Name = 'RELIGION_SPREAD_HOLY_SITE_PRESSURE_MULTIPLIER'; -- Was 2
