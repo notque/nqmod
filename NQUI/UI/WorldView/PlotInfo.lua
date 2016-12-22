@@ -1,12 +1,11 @@
 -- ===========================================================================
---	Plot information
+--	Plot information 
 --	Handles: plot purchasing, resources, etc...
 -- ===========================================================================
 include("InstanceManager");
 include("AdjacencyBonusSupport");
 include("SupportFunctions");
 include("Civ6Common"); -- AutoSizeGridButton
-include("CitySupport");
 
 -- ===========================================================================
 --	CONSTANTS
@@ -37,8 +36,7 @@ local m_uiWorldMap			:table = {};
 local m_uiPurchase			:table = {};	-- Purchase plots showing
 local m_uiCitizens			:table = {};	-- Citizens showing
 local m_uiSwapTiles			:table = {};	-- Swap tiles showing
-local m_kLensMask				:table = {};	-- IDs of lenses that are not mask shadowed
-local m_nextPlotID			:number = 0;	-- Saving the next plot ID for switching between cities
+local m_kLensMask			:table = {};	-- IDs of lenses that are not mask shadowed
 
 -- ===========================================================================
 function OnClickCitizen( plotId:number )
@@ -51,6 +49,11 @@ function OnClickCitizen( plotId:number )
 	tParameters[CityCommandTypes.PARAM_Y] = kPlot:GetY();
 
 	local tResults :table = CityManager.RequestCommand( pSelectedCity, CityCommandTypes.MANAGE, tParameters );
+
+	--update city banner
+	--print("Updating Banner Details");
+	--LuaEvents.UpdateBanner(Game.GetLocalPlayer(), pSelectedCity:GetID());
+
 	return true;
 end
 
@@ -82,8 +85,8 @@ function OnClickPurchasePlot( plotId:number )
 	local pSelectedCity = UI.GetHeadSelectedCity();
 	if pSelectedCity ~= nil then
 		if (CityManager.CanStartCommand( pSelectedCity, CityCommandTypes.PURCHASE, tParameters)) then
-			CityManager.RequestCommand( pSelectedCity, CityCommandTypes.PURCHASE, tParameters);
-			UI.PlaySound("Purchase_Tile");
+			CityManager.RequestCommand( pSelectedCity, CityCommandTypes.PURCHASE, tParameters);		
+			UI.PlaySound("Purchase_Tile");	
 		end
 	else
 		if not isUsingDistrictPlacementFilter and not isUsingBuildingPlacementFilter then
@@ -103,8 +106,8 @@ end
 --	Animation of coin rotating finished, either stop (if mouse is gone)
 --	or spin it again if mouse is still on top of it.
 -- ===========================================================================
-function OnSpinningCoinAnimDone( pControl:table )
-	if pControl:HasMouseOver() then
+function OnSpinningCoinAnimDone( pControl:table )	
+	if pControl:HasMouseOver() then 
 		pControl:SetToBeginning();
 		pControl:Play();
 	else
@@ -162,10 +165,10 @@ function ShowPurchases()
 		local playerTreasury:table	= Players[Game.GetLocalPlayer()]:GetTreasury();
 		local playerGold	:number = playerTreasury:GetGoldBalance();
 		local cityGold		:table	= pSelectedCity:GetGold();
-
-		for i,plotId in pairs(tPlots) do
-			local kPlot	:table = Map.GetPlotByIndex(plotId);
-			if	(not isUsingDistrictPlacementFilter and not isUsingBuildingPlacementFilter) or
+		
+		for i,plotId in pairs(tPlots) do			
+			local kPlot	:table = Map.GetPlotByIndex(plotId);	
+			if	(not isUsingDistrictPlacementFilter and not isUsingBuildingPlacementFilter) or 
 				(isUsingDistrictPlacementFilter and kPlot:CanHaveDistrict(district.Index, pSelectedCity:GetOwner(), pSelectedCity:GetID())) or
 				(isUsingBuildingPlacementFilter and kPlot:CanHaveWonder(building.Index, pSelectedCity:GetOwner(), pSelectedCity:GetID())) then
 
@@ -180,7 +183,7 @@ function ShowPurchases()
 					local index:number = kPlot:GetIndex();
 					local pInstance:table = GetInstanceAt( index );
 					if pInstance ~= nil then
-						local goldCost = cityGold:GetPlotPurchaseCost( index );
+						local goldCost = cityGold:GetPlotPurchaseCost( index ); 	
 						pInstance.PurchaseButton:SetText(tostring(goldCost));
 						AutoSizeGridButton(pInstance.PurchaseButton,51,30,25,"H");
 						pInstance.PurchaseButton:SetDisabled( goldCost > playerGold );
@@ -189,7 +192,7 @@ function ShowPurchases()
 						else
 							pInstance.PurchaseButton:GetTextControl():SetColorByName("ResGoldLabelCS");
 						end
-						pInstance.PurchaseButton:RegisterCallback( Mouse.eLClick, function() OnClickPurchasePlot( index ); end );
+						pInstance.PurchaseButton:RegisterCallback( Mouse.eLClick, function() OnClickPurchasePlot( index ); end );											
 						pInstance.PurchaseAnim:SetColor( (goldCost > playerGold ) and 0xbb808080 or 0xffffffff ) ;
 						pInstance.PurchaseAnim:RegisterEndCallback( OnSpinningCoinAnimDone );
 						if (goldCost > playerGold ) then
@@ -207,7 +210,7 @@ function ShowPurchases()
 					table.insert(m_kLensMask[KEY_PLOT_PURCHASE], plotId);
 				end
 			end
-		end
+		end		 
 	end
 
 	if not isUsingDistrictPlacementFilter and not isUsingBuildingPlacementFilter then
@@ -215,9 +218,9 @@ function ShowPurchases()
 		tParameters[CityCommandTypes.PARAM_PLOT_PURCHASE] = UI.GetInterfaceModeParameter(CityCommandTypes.PARAM_PLOT_PURCHASE);
 
 		-- Highlight the plots available for purchase
-		local tResults :table = CityManager.GetCommandTargets( pSelectedCity, CityCommandTypes.PURCHASE, tParameters );
+		local tResults :table = CityManager.GetCommandTargets( pSelectedCity, CityCommandTypes.PURCHASE, tParameters );				
 		if (tResults[CityCommandResults.PLOTS] ~= nil and #tResults[CityCommandResults.PLOTS] ~= 0) then
-
+	
 			for _,plotId in ipairs(tResults[CityCommandResults.PLOTS]) do
 				table.insert(m_kLensMask[KEY_PLOT_PURCHASE], plotId);
 			end
@@ -228,7 +231,7 @@ function ShowPurchases()
 				--table.insert(tResults[CityCommandResults.PLOTS], plotId);
 				--local pInstance:table = GetInstanceAt( plotId );				-- Ensures an instance is created.  TODO: Revisit; just create one per hex?
 				table.insert(m_kLensMask[KEY_PLOT_PURCHASE], plotId);
-			end
+			end		
 		end
 	end
 
@@ -273,12 +276,12 @@ function ShowCitizens()
 	if tPlots ~= nil and (table.count(tPlots) > 0) then
 
 		m_kLensMask[KEY_CITIZEN_MANAGEMENT] = {};
-
-		for i,plotId in pairs(tPlots) do
+		
+		for i,plotId in pairs(tPlots) do			
 
 			table.insert(m_kLensMask[KEY_CITIZEN_MANAGEMENT], plotId);
 
-			local kPlot	:table = Map.GetPlotByIndex(plotId);
+			local kPlot	:table = Map.GetPlotByIndex(plotId);	
 			local index:number = kPlot:GetIndex();
 			local pInstance:table = GetInstanceAt( index );
 			if pInstance ~= nil then
@@ -305,14 +308,14 @@ function ShowCitizens()
 				end
 
 				if(maxUnits > 1) then
-					--[[ TODO: Add back for Patch2, wasn't in due to missing TEXT lock.
+					--[[ TODO: Add back for Patch2, wasn't in due to missing TEXT lock. 
 					local toolTip:string = Locale.Lookup("LOC_HUD_CITY_SPECIALISTS", numUnits, maxUnits);
 					pInstance.CitizenMeterBG:SetToolTipString( toolTip );
 					--]]
-					pInstance.CitizenMeterBG:SetHide(false);
+					pInstance.CitizenMeterBG:SetHide(false);					
 					pInstance.CurrentAmount:SetText(numUnits);
 					pInstance.TotalAmount:SetText(maxUnits);
-					pInstance.CitizenMeter:SetPercent(numUnits / maxUnits);
+					pInstance.CitizenMeter:SetPercent(numUnits / maxUnits);					
 				else
 					pInstance.CitizenMeterBG:SetHide(true);
 				end
@@ -344,7 +347,7 @@ function ShowCitizens()
 					--pInstance.CitizenButton:SetTextureOffsetVal(0, 0);
 				end
 			end
-		end
+		end		 
 	end
 end
 
@@ -369,12 +372,12 @@ function ShowSwapTiles()
 	if tPlots ~= nil and (table.count(tPlots) > 0) then
 
 		m_kLensMask[KEY_SWAP_TILE_OWNER] = {};
-
-		for i,plotId in pairs(tPlots) do
+		
+		for i,plotId in pairs(tPlots) do			
 
 			table.insert(m_kLensMask[KEY_SWAP_TILE_OWNER], plotId);
 
-			local kPlot	:table = Map.GetPlotByIndex(plotId);
+			local kPlot	:table = Map.GetPlotByIndex(plotId);	
 			local index:number = kPlot:GetIndex();
 			local pInstance:table = GetInstanceAt( index );
 			if pInstance ~= nil then
@@ -386,7 +389,7 @@ function ShowSwapTiles()
 				pInstance.SwapTileOwnerButton:SetHide(false);
 				pInstance.SwapTileOwnerButton:SetSizeX(pInstance.SwapLabel:GetSizeX() + PADDING_SWAP_BUTTON);
 			end
-		end
+		end		 
 	end
 end
 
@@ -463,6 +466,10 @@ function OnPlotYieldChanged(x, y)
 	if plot ~= nil then
 		table.insert(m_PlotYieldsChanged, plot:GetIndex());
 	end
+
+	--update city banner details
+	print("Updating City Banners");
+	LuaEvents.UpdateAllBanners(Game.GetLocalPlayer());
 end
 
 -- ===========================================================================
@@ -514,7 +521,7 @@ end
 -- ===========================================================================
 --	Debug Stress Test
 -- ===========================================================================
-function DebugStressTest()
+function DebugStressTest()	
 	-- Create a lot of instances
 	local MAX_X:number = 128;	--128
 	local MAX_Y:number = 60;	--80
@@ -557,76 +564,19 @@ function HideSwapTiles()
 end
 
 -- ===========================================================================
-function HidePurchases()
+function HidePurchases()	
 	for _,pInstance in ipairs(m_uiPurchase) do
 		pInstance.PurchaseButton:SetHide( true );
-
-		-- NOTE: This plot can't be returned to the instnace manager
-		-- (ReleaseInstance) unless the local cached version in (m_uiWorldMap)
-		-- is removed too; which is only safe if NOTHING else utilizing this
+		
+		-- NOTE: This plot can't be returned to the instnace manager 
+		-- (ReleaseInstance) unless the local cached version in (m_uiWorldMap) 
+		-- is removed too; which is only safe if NOTHING else utilizing this 
 		-- plot info instance.
 	end
 	m_uiPurchase = {};
 
 	UILens.ClearLayerHexes( LensLayers.PURCHASE_PLOT );
 	m_kLensMask[KEY_PLOT_PURCHASE] = nil;
-end
-
--- ===========================================================================
-function ShowNextCityPlot()
-	if UILens.IsLayerOn(LensLayers.PURCHASE_PLOT) or UILens.IsLayerOn(LensLayers.CITIZEN_MANAGEMENT) then
-		local pSelectedCity					:table 	= UI.GetHeadSelectedCity();
-		local pCityCulture					:table 	= pSelectedCity:GetCulture();
-		local pNextPlotID						:number = pCityCulture:GetNextPlot();
-		local TurnsUntilExpansion		:number = pCityCulture:GetTurnsUntilExpansion();
-
-		m_nextPlotID = pNextPlotID; -- saves cached copy of next plot ID for current city
-
-		local pInstance:table = GetInstanceAt( pNextPlotID );
-		pInstance.NextPlotLabel:SetString( "[ICON_Turn]" .. Locale.Lookup("LOC_HUD_CITY_IN_TURNS" , TurnsUntilExpansion ) );
-		pInstance.NextPlotLabel:SetToolTipString( " " .. Locale.Lookup( "LOC_HUD_CITY_BORDER_EXPANSION" , TurnsUntilExpansion ).."[ICON_Turn]" );
-		pInstance.NextPlotButton:SetHide( false );
-
-		--Shows the next city plot border (white color - from great people lense)
-		--TODO: check if white border is confusing or missleading
-		local m_targetPlots:table = {};
-		if pNextPlotID >= 0 then
-			table.insert(m_targetPlots, pNextPlotID);
-			local eLocalPlayer:number = Game.GetLocalPlayer();
-			UILens.ToggleLayerOn(LensLayers.HEX_COLORING_GREAT_PEOPLE);
-			UILens.SetLayerHexesArea(LensLayers.HEX_COLORING_GREAT_PEOPLE, eLocalPlayer, m_targetPlots);
-		end
-	end
-end
-
--- ===========================================================================
-function HideNextCityPlot()
-	local pSelectedCity					:table 	= UI.GetHeadSelectedCity();
-	local pCityCulture					:table 	= pSelectedCity:GetCulture();
-	local pNextPlotID						:number = pCityCulture:GetNextPlot();
-	local pInstance							:table  = {};
-
-	-- Hide the next city plot label from a cached Plot ID
-	if pNextPlotID ~= m_nextPlotID then
-	 	pInstance = GetInstanceAt( m_nextPlotID );
-	 	pInstance.NextPlotButton:SetHide( true );
-	end
-
-	if not ( UILens.IsLayerOn(LensLayers.PURCHASE_PLOT) or UILens.IsLayerOn(LensLayers.CITIZEN_MANAGEMENT) ) then
-		-- Hide the next city plot label from a current Plot ID
-		pInstance = GetInstanceAt( pNextPlotID );
-		pInstance.NextPlotButton:SetHide( true );
-
-		-- Hide all the next city plot labels from the instance tiles
-		local pInstance:table = GetInstanceAt( pNextPlotID );
-		for _,pInstance in ipairs(m_uiPurchase) do
-		 	pInstance.NextPlotButton:SetHide( true );
-		end
-
-		-- Clear the great people lense to hide the next city plot border
-		UILens.ToggleLayerOff( LensLayers.HEX_COLORING_GREAT_PEOPLE );
-		UILens.ClearLayerHexes( LensLayers.HEX_COLORING_GREAT_PEOPLE );
-	end
 end
 
 -- ===========================================================================
@@ -651,8 +601,8 @@ function ShowCityYields()
 			local yieldAmt:number = plot:GetYield(row.Index);
 			if yieldAmt > 0 then
 				table.insert(yields, plotId);
-			end
-		end
+			end			
+		end			
 	end
 
 	UILens.SetLayerHexesArea(LensLayers.CITY_YIELDS, Game.GetLocalPlayer(), yields);
@@ -678,7 +628,7 @@ function RefreshPurchasePlots()
 	if UILens.IsLayerOn( LensLayers.PURCHASE_PLOT ) then
 		HidePurchases();		-- Out with the old
 		ShowPurchases();		-- In with the new
-		RealizeShadowMask();
+		RealizeShadowMask();	
 	end
 end
 
@@ -688,7 +638,7 @@ function RefreshCitizenManagement()
 	if UILens.IsLayerOn( LensLayers.CITIZEN_MANAGEMENT ) then
 		HideCitizens();
 		ShowCitizens();
-		RealizeShadowMask();
+		RealizeShadowMask();	
 	end
 end
 
@@ -806,9 +756,7 @@ end
 -- ===========================================================================
 function OnCitySelectionChanged(owner:number, ID:number, i:number, j:number, k:number, bSelected:boolean, bEditable:boolean)
 	if owner == Game.GetLocalPlayer() then
-
-		HideNextCityPlot();
-		ShowNextCityPlot();
+		
 		RefreshPurchasePlots();
 		RefreshCitizenManagement();
 		RefreshCityYieldsPlotList();
@@ -823,7 +771,6 @@ end
 function OnCityWorkerChanged( owner:number, cityID:number, plotX:number, plotY:number )
 	if owner == Game.GetLocalPlayer() then
 		RefreshCitizenManagement();
-		ShowNextCityPlot();
 		LuaEvents.PlotInfo_UpdatePlotTooltip(true);
 	end
 end
@@ -842,8 +789,8 @@ end
 --	Determine if the camera tilt should be on/off
 -- ===========================================================================
 function RealizeTilt()
-	if	UILens.IsLayerOn(LensLayers.PURCHASE_PLOT) or
-		UILens.IsLayerOn(LensLayers.CITIZEN_MANAGEMENT) then
+	if	UILens.IsLayerOn(LensLayers.PURCHASE_PLOT) or 
+		UILens.IsLayerOn(LensLayers.CITIZEN_MANAGEMENT) then		
 		if not UI.IsFixedTiltModeOn() then
 			UI.SetFixedTiltMode( true );
 		end
@@ -909,20 +856,18 @@ end
 --	Called once per layer that is turned on when a new lens is activated,
 --	or when a player explicitly turns off the layer from the "player" lens.
 -- ===========================================================================
-function OnLensLayerOn( layerNum:number )
+function OnLensLayerOn( layerNum:number )		
 	if layerNum == LensLayers.CITIZEN_MANAGEMENT then
-		ShowCitizens();
-		ShowNextCityPlot();
+		ShowCitizens();	
 		RealizeShadowMask();
 		RealizeTilt();
 		RefreshCityYieldsPlotList();
 	elseif layerNum == LensLayers.PURCHASE_PLOT then
-		ShowPurchases();
-		ShowNextCityPlot();
+		ShowPurchases();	
 		RealizeShadowMask();
 		RealizeTilt();
 		RefreshCityYieldsPlotList();
-	elseif layerNum == LensLayers.CITY_YIELDS then
+	elseif layerNum == LensLayers.CITY_YIELDS then	
 		ShowCityYields();
 	end
 end
@@ -933,14 +878,12 @@ end
 --	or when a player explicitly turns off the layer from the "player" lens.
 -- ===========================================================================
 function OnLensLayerOff( layerNum:number )
-	if	layerNum == LensLayers.CITIZEN_MANAGEMENT then
-		HideNextCityPlot();
+	if	layerNum == LensLayers.CITIZEN_MANAGEMENT then		
 		HideCitizens();
 		RealizeShadowMask();
 		RealizeTilt();
 		RefreshCityYieldsPlotList();
-	elseif	layerNum == LensLayers.PURCHASE_PLOT then
-		HideNextCityPlot();
+	elseif	layerNum == LensLayers.PURCHASE_PLOT then	
 		HidePurchases();
 		RealizeShadowMask();
 		RealizeTilt();
@@ -956,7 +899,7 @@ end
 -- ===========================================================================
 function OnLocalPlayerTurnBegin()
 	m_kLensMask = {};		-- clear all entries
-	RealizeShadowMask();
+	RealizeShadowMask();	
 end
 
 -- ===========================================================================
@@ -978,18 +921,18 @@ function OnInputHandler( pInputStruct:table )
 	local uiMsg = pInputStruct:GetMessageType();
 	if (uiMsg == KeyEvents.KeyUp) then return KeyHandler( pInputStruct:GetKey() ); end;
 	return false;
-end
+end 
 
 -- ===========================================================================
---
+--	
 -- ===========================================================================
 function Initialize()
 	--	EVENT LISTENERS
 	ContextPtr:SetInitHandler( OnInit );
 	ContextPtr:SetInputHandler( OnInputHandler, true );
 	ContextPtr:SetShutdown( OnShutdown );
-
-	Events.CityMadePurchase.Add(		OnCityMadePurchase );
+	
+	Events.CityMadePurchase.Add(		OnCityMadePurchase );	
 	Events.CitySelectionChanged.Add(	OnCitySelectionChanged );
 	Events.CityWorkerChanged.Add(		OnCityWorkerChanged );
 	Events.CityFocusChanged.Add(		OnCityWorkerChanged);

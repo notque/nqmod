@@ -16,29 +16,19 @@
   <Files>
     <File>UI/ActionPanel.lua</File>
     <File>PhasedTurns.xml</File>
-    <File>PhasedTurnsConfig.xml</File>
-    <File>PhasedTurnsText.sql</File>
   </Files>
   <Components>
-    <ImportFiles id="PHASEDTURNS_IMPORT">
+    
+    <ImportFiles id="Q_IMPORT">
       <Items>
         <File>UI/ActionPanel.lua</File>
       </Items>
     </ImportFiles>
     
-    <UpdateDatabase id="PHASEDTURNS_COMPONENT">
+    <UpdateDatabase id="Q_COMPONENT">
       <Items>
         <File>PhasedTurns.xml</File>
       </Items>
     </UpdateDatabase>
   </Components>
-
-  <Settings>
-    <!--Updates to Configuration database (DebugConfiguration.sqlite)-->
-    <Custom id="PHASEDTURNS_CONFIG">
-      <Items>
-        <File>PhasedTurnsConfig.xml</File>
-      </Items>
-    </Custom>
-  </Settings>
 </Mod>

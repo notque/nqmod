@@ -667,7 +667,6 @@ end
 --	Set + - in group row
 -- ===========================================================================
 function RealizeGroup( instance:table )
-	if(not instance) then return end
 	local v :number = (instance["isCollapsed"]==false and instance.RowExpandCheck:GetSizeY() or 0);
 	instance.RowExpandCheck:SetTextureOffsetVal(0, v);
 
@@ -905,25 +904,6 @@ function cityincome_fields( kCityData, pCityInstance )
 				scienceTilesWorked		= scienceTilesWorked	- kBuilding.SciencePerTurn;
 				cultureTilesWorked		= cultureTilesWorked	- kBuilding.CulturePerTurn;
 			end
-
-			local pLineItemInstance:table = {};
-			ContextPtr:BuildInstanceForControl("CityIncomeLineItemInstance", pLineItemInstance, pCityInstance.LineItemStack );
-			pLineItemInstance.LineItemName:SetText( kDistrict.Name );
-
-			pLineItemInstance.Production:SetText( toPlusMinusNoneString(kDistrict.Production) );
-			pLineItemInstance.Food:SetText( toPlusMinusNoneString(kDistrict.Food) );
-			pLineItemInstance.Gold:SetText( toPlusMinusNoneString(kDistrict.Gold) );
-			pLineItemInstance.Faith:SetText( toPlusMinusNoneString(kDistrict.Faith) );
-			pLineItemInstance.Science:SetText( toPlusMinusNoneString(kDistrict.Science) );
-			pLineItemInstance.Culture:SetText( toPlusMinusNoneString(kDistrict.Culture) );
-
-			productionTilesWorked	= productionTilesWorked - kDistrict.Production;
-			foodTilesWorked			= foodTilesWorked		- kDistrict.Food;
-			goldTilesWorked			= goldTilesWorked		- kDistrict.Gold;
-			faithTilesWorked		= faithTilesWorked		- kDistrict.Faith;
-			scienceTilesWorked		= scienceTilesWorked	- kDistrict.Science;
-			cultureTilesWorked		= cultureTilesWorked	- kDistrict.Culture;
-
 		end
 
 		local pLineItemInstance:table = {};
@@ -1018,60 +998,6 @@ function ViewYieldsPage()
 	SetGroupCollapsePadding(instance, pFooterInstance.Top:GetSizeY() );
 	RealizeGroup( instance );
 
-  -- ========== Adjacency Bonuses ==========
-	instance = NewCollapsibleGroupInstance();
-	instance.RowHeaderButton:SetText( Locale.Lookup("AdjacencyBonusInstance") );
-
-	local pAdjacencyHeaderInstance:table = {}
-	ContextPtr:BuildInstanceForControl( "AdjacencyBonusHeaderInstance", pAdjacencyHeaderInstance, instance.ContentStack ) ;
-
-	pAdjacencyHeaderInstance.ProductionButton:RegisterCallback( Mouse.eLClick, function() sortBy( "ProductionPerTurn" ) end )
-	pAdjacencyHeaderInstance.FoodButton:RegisterCallback( Mouse.eLClick, function() sortBy( "FoodPerTurn" ) end )
-	pAdjacencyHeaderInstance.GoldButton:RegisterCallback( Mouse.eLClick, function() sortBy( "GoldPerTurn" ) end )
-	pAdjacencyHeaderInstance.FaithButton:RegisterCallback( Mouse.eLClick, function() sortBy( "FaithPerTurn" ) end )
-	pAdjacencyHeaderInstance.ScienceButton:RegisterCallback( Mouse.eLClick, function() sortBy( "SciencePerTurn" ) end )
-	pAdjacencyHeaderInstance.CultureButton:RegisterCallback( Mouse.eLClick, function() sortBy( "CulturePerTurn" ) end )
-	pAdjacencyHeaderInstance.TourismButton:RegisterCallback( Mouse.eLClick, function() sortBy( "TourismPerTurn" ) end )
-
-
-
-	local production		:number = 0;
-	local food	:number = 0;
-	local gold		:number = 0;
-	local faith	:number = 0;
-	local science	:number = 0;
-	local culture	:number = 0;
-
-	for cityName,kCityData in spairs( m_kCityData, function( t, a, b ) return sortFunction( t, a, b ) end ) do
-		for i,kDistrict in ipairs(kCityData.BuildingsAndDistricts) do
-				food = food + kDistrict.Production;
-				gold = gold+ kDistrict.Gold;
-				faith = faith + kDistrict.Faith;
-				science = science + kDistrict.Science;
-				culture = culture + kDistrict.Culture;
-		end
-	end
-
-
-	local pLineItemInstance:table = {};
-	ContextPtr:BuildInstanceForControl("AdjacencyBonusInstance", pLineItemInstance, pAdjacencyHeaderInstance.LineItemStack );
-	pLineItemInstance.Production:SetText( toPlusMinusNoneString(production) );
-	pLineItemInstance.Food:SetText( toPlusMinusNoneString(food) );
-	pLineItemInstance.Gold:SetText( toPlusMinusNoneString(gold) );
-	pLineItemInstance.Faith:SetText( toPlusMinusNoneString(faith) );
-	pLineItemInstance.Science:SetText( toPlusMinusNoneString(science) );
-	pLineItemInstance.Culture:SetText( toPlusMinusNoneString(culture) );
-
-  SetGroupCollapsePadding(instance, 10 );
-	pAdjacencyHeaderInstance.LineItemStack:CalculateSize();
-	-- pAdjacencyHeaderInstance.Darken:SetSizeY( pAdjacencyHeaderInstance.LineItemStack:GetSizeY() + DARKEN_CITY_INCOME_AREA_ADDITIONAL_Y );
-	-- pAdjacencyHeaderInstance.Top:ReprocessAnchoring();
-
-	-- pAdjacencyHeaderInstance.Darken:SetSizeY( pCityInstance.LineItemStack:GetSizeY() + DARKEN_CITY_INCOME_AREA_ADDITIONAL_Y );
-	instance.ContentStack:CalculateSize();
-	-- SetGroupCollapsePadding(instance, 100 );
-	-- RealizeGroup( instance );
-	RealizeGroup( instance );
 
 	-- ========== Building Expenses ==========
 

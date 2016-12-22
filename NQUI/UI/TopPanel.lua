@@ -3,7 +3,6 @@
 -- ===========================================================================
 include( "InstanceManager" );
 include( "SupportFunctions" ); -- Round
-include("TradeSupport");
 include( "ToolTipHelper_PlayerYields" );
 
 -- ===========================================================================
@@ -66,6 +65,25 @@ function OnToggleReportsScreen()
 		LuaEvents.TopPanel_OpenReportsScreen();
 	else
 		LuaEvents.TopPanel_CloseReportsScreen();
+	end
+end
+
+-- ===========================================================================
+--	UI Callback
+--	Send signal to open/close the Demos Screen
+-- ===========================================================================
+function OnToggleDemosScreen()
+	local pDemosScreen :table = ContextPtr:LookUpControl( "/InGame/DemosScreen" );
+	if pDemosScreen == nil then
+		UI.DataError("Unable to toggle Demos Screen.  Not found in '/InGame/DemosScreen'.");
+		return;
+	end
+	if pDemosScreen:IsHidden() then
+		print("Show Demos");
+		LuaEvents.TopPanel_OpenDemosScreen();
+	else
+		print("Hide Demos");
+		LuaEvents.TopPanel_CloseDemosScreen();
 	end
 end
 
@@ -135,106 +153,7 @@ function RefreshYields()
 	---- TOURISM ----
 	local tourismRate = Round(localPlayer:GetStats():GetTourism(), 1);
 	local tourismRateTT:string = Locale.Lookup("LOC_WORLD_RANKINGS_OVERVIEW_CULTURE_TOURISM_RATE", tourismRate);
-	local tourismBreakdown = localPlayer:GetStats():GetTourismToolTip() .. "[NEWLINE]";
-
-	--- Tourism breakdown
-	local artifacts:number = 0;
-	local numArtifacts:number = 0;
-	local relics:number = 0;
-	local numRelics:number = 0;
-	local landscapes:number = 0;
-	local numLandscapes:number = 0;
-	local music:number = 0;
-	local numMusic:number = 0;
-	local portraits:number = 0;
-	local numPortraits:number = 0;
-	local religious:number = 0;
-	local numReligious:number = 0;
-	local sculptures:number = 0;
-	local numSculptures:number = 0;
-	local writing:number = 0;
-	local numWriting:number = 0;
-
-	local pCities:table = localPlayer:GetCities();
-	for i, pCity in pCities:Members() do
-		if pCity ~= nil and pCity:GetOwner() == ePlayer then
-			local pCityBldgs:table = pCity:GetBuildings();
-			for buildingInfo in GameInfo.Buildings() do
-				local buildingIndex:number = buildingInfo.Index;
-				if(pCityBldgs:HasBuilding(buildingIndex)) then
-					local numSlots:number = pCityBldgs:GetNumGreatWorkSlots(buildingInfo.Index);
-					if (numSlots ~= nil and numSlots > 0) then
-							local slotIndex:number = 0;
-							for _:number=0, numSlots - 1 do
-								local greatWorkIndex:number = pCityBldgs:GetGreatWorkInSlot(buildingIndex, slotIndex);
-								slotIndex = slotIndex +1;
-								if(greatWorkIndex ~= -1) then
-									local greatWorkType:number = pCityBldgs:GetGreatWorkTypeFromIndex(greatWorkIndex);
-									local greatWorkInfo:table = GameInfo.GreatWorks[greatWorkType];
-									local greatWorkObjectType = greatWorkInfo.GreatWorkObjectType;
-									local yieldValue:number = GameInfo.GreatWork_YieldChanges[greatWorkInfo.GreatWorkType].YieldChange;
-									print("Got a work of type " .. greatWorkObjectType .. " in " .. buildingInfo.Name);
-
-									if(greatWorkObjectType ==  	"GREATWORKOBJECT_ARTIFACT") then
-										artifacts  = artifacts + yieldValue;
-										numArtifacts = numArtifacts +1;
-									elseif (greatWorkObjectType ==  "GREATWORKOBJECT_LANDSCAPE") then
-										landscapes  = landscapes + yieldValue;
-										numLandscapes = numLandscapes +1;
-									elseif (greatWorkObjectType ==  "GREATWORKOBJECT_MUSIC") then
-										music  = music + yieldValue;
-										numMusic = numMusic +1;
-									elseif (greatWorkObjectType ==  "GREATWORKOBJECT_PORTRAIT") then
-										portraits  = portraits + yieldValue;
-										numPortraits = numPortraits +1;
-									elseif (greatWorkObjectType ==  "GREATWORKOBJECT_RELIC") then
-										relics  = relics + yieldValue;
-										numRelics = numRelics +1;
-									elseif (greatWorkObjectType ==  "GREATWORKOBJECT_RELIGIOUS") then
-										religious  = religious + yieldValue;
-										numReligious = numReligious +1;
-									elseif (greatWorkObjectType ==  "GREATWORKOBJECT_SCULPTURE") then
-										sculptures  = sculptures + yieldValue;
-										numSculptures =numSculptures +1;
-									elseif (greatWorkObjectType ==  "GREATWORKOBJECT_WRITING") then
-										writing  = writing + yieldValue;
-										numWriting = numWriting +1;
-									end
-								end
-							end
-					end
-				end
-			end
-		end
-	end
-
-	if(numArtifacts > 0) then
-		tourismBreakdown = tourismBreakdown .. "+" .. artifacts .. " [ICON_Tourism]     " ..  numArtifacts .. " [ICON_GreatWork_Artifact]" .. "[NEWLINE]";
-	end
-	if(numLandscapes > 0) then
-		tourismBreakdown = tourismBreakdown .. "+" .. landscapes .. " [ICON_Tourism]     " ..  numLandscapes .. " [ICON_GreatWork_Landscape]" .. "[NEWLINE]";
-	end
-	if(numMusic > 0) then
-		tourismBreakdown = tourismBreakdown .. "+" .. music .. " [ICON_Tourism]     " ..  numMusic .. " [ICON_GreatWork_Music]" .. "[NEWLINE]";
-	end
-	if(numPortraits > 0) then
-		tourismBreakdown = tourismBreakdown .. "+" .. portraits .. " [ICON_Tourism]     " ..  numPortraits .. " [ICON_GreatWork_Portrait]" .. "[NEWLINE]";
-	end
-	if(numRelics > 0) then
-		tourismBreakdown = tourismBreakdown .. "+" .. relics .. " [ICON_Tourism]     " ..  numRelics .. " [ICON_GreatWork_Relic]" .. "[NEWLINE]";
-	end
-	if(numReligious > 0) then
-		tourismBreakdown = tourismBreakdown .. "+" .. religious .. " [ICON_Tourism]     " ..  numReligious .. " [ICON_GreatWork_Religious]" .. "[NEWLINE]";
-	end
-	if(numSculptures > 0) then
-		tourismBreakdown = tourismBreakdown .. "+" .. sculptures .. " [ICON_Tourism]     " ..  numSculptures .. " [ICON_GreatWork_Sculpture]" .. "[NEWLINE]";
-	end
-	if(numWriting > 0) then
-		tourismBreakdown = tourismBreakdown .. "+" .. writing .. " [ICON_Tourism]     " ..  numWriting .. " [ICON_GreatWork_Writing]".. "[NEWLINE]" ;
-	end
-	-- natural parks
-
-
+	local tourismBreakdown = localPlayer:GetStats():GetTourismToolTip();
 	if(tourismBreakdown and #tourismBreakdown > 0) then
 		tourismRateTT = tourismRateTT .. "[NEWLINE][NEWLINE]" .. tourismBreakdown;
 	end
@@ -584,6 +503,7 @@ function Initialize()
 	Controls.MenuButton:RegisterCallback( Mouse.eLClick, OnMenu );
 	Controls.MenuButton:RegisterCallback( Mouse.eMouseEnter, function() UI.PlaySound("Main_Menu_Mouse_Over"); end);
 	Controls.ViewReports:RegisterCallback( Mouse.eLClick, OnToggleReportsScreen );
+	Controls.Demos:RegisterCallback( Mouse.eLClick, OnToggleDemosScreen );
 
 	-- Game Events
 	Events.AnarchyBegins.Add(				OnRefreshYields );

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Context >
 
   <Grid						ID="Backing"				Anchor="C,T" Size="parent+100,29" Texture="TopBar_Bar" SliceCorner="28,8" SliceTextureSize="57,29">
@@ -22,7 +22,7 @@
       <Label	ID="CurrentDate"		 Style="TopBarMeta" String="LOC_TOP_PANEL_CURRENT_DATE"/>
     </Stack>
   </Stack>
-
+  
   <!-- Civ Yields Display -->
   <Stack					ID="InfoStack" Offset="10,2"  StackGrowth="Right" Padding="2">
     <Stack				ID="YieldStack"						  StackGrowth="Right" Padding="2">
@@ -66,8 +66,6 @@
           <Label	ID="TradeRoutesActive"									Offset="0,-3" Style="FontNormal14" ColorSet="TopBarValueCS" String="?"	WrapWidth="45" />
           <Label																					Offset="0,-3" Style="FontNormal14" ColorSet="TopBarValueCS" String="/"	WrapWidth="45" />
           <Label	ID="TradeRoutesCapacity"								Offset="0,-3"	Style="FontNormal14" ColorSet="TopBarValueCS" String="?"	WrapWidth="45" />
-          <Label	ID="TradeRoutesIdleLabel"								Offset="0,-3" Style="FontNormal14" ColorSet="TopBarValueCS" String="/"	WrapWidth="45" Hidden="1"/>
-          <Label	ID="TradeRoutesIdle"   	  							Offset="0,-3"	Style="FontNormal14" ColorSet="TopBarValueCS" String="?"	WrapWidth="45" Hidden="1"/>
         </Stack>
 
 		  <Tutorial  ID="TutTradeRoutes" Style="TutorialContainer" Anchor="C,B" AnchorSide="I,O" Offset="0,24" TriggerBy="TutorialTradeRoutes" >
@@ -106,7 +104,8 @@
       <Stack ID="ResourceStack" StackGrowth="Right" StackPadding="4" Anchor="L,C" Offset="0,-5"/>
     </Grid>
 
-		<GridButton ID="ViewReports" Style="RoundedButton" String="LOC_HUD_REPORTS_VIEW_REPORTS" Size="50,24" />
+		<GridButton ID="ViewReports" Style="RoundedButton" String="Reports" Size="50,24" />
+    <GridButton ID="Demos" Style="RoundedButton" String="Demographics" Size="120,24" />
 	</Stack>
 
 	<Tutorial ID="TechYieldPointer" Style="TutorialContainer" Anchor="L,T" Offset="46, 70" TriggerBy="TutorialTechYieldPointer">
@@ -126,7 +125,7 @@
 			<Image Texture="Tutorial_ArrowV" Offset="-24,-20" Size="44,58" FlipY="true"/>
 		</SlideAnim>
 	</Tutorial>
-
+	
 	<ToolTipType Name="TooltipTypeTopPanel" >
 		<Grid Size="530,90" Offset="8.0" Padding="8,8" Style="TTGrid"  ID="TopPanelMouseover" NoClip="1" >
 			<Label Offset="12,12" Style="FontNormal16" ID="TooltipLabel" String="LOC_TOP_PANEL_TOOLTIP_DESCRIPTION" LeadingOffset="-5" WrapWidth="512" />
@@ -136,12 +135,12 @@
 	<Instance Name="ResourceInstance">
 		<Label	ID="ResourceText" Style="FontNormal14" ColorSet="TopBarValueCS"/>
 	</Instance>
-
+	
 	<Instance Name="TopBarButtonInstance">
-		<Container	ID="Top"																		Size="50,36" >
+		<Container	ID="Top"																		Size="50,36" > 
 			<Image									Anchor="C,C" Offset="0,2"			Size="39,39"		Texture="TopBarRingOtherBG.dds"		/>
 			<Image									Anchor="C,C" Offset="0,0"			Size="49,53"		Texture="TopBarRingOther.dds"		/>
 		</Container>
 	</Instance>
-
+  
 </Context>

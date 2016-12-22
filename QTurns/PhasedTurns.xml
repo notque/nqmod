@@ -7,6 +7,7 @@
 			<Where TurnSegmentType="TURNSEG_TACTICAL" />
 		</Update>
 	</TurnSegments>
+
 	<TurnSegments>
 		<Update>
 			<Set TimeLimit_PerUnit="4" />
@@ -34,6 +35,5 @@
 			<Where ActiveSegmentType="TURNSEG_TACTICAL" />
 		</Update>
 	</TurnPhases>
-
 
 </GameInfo>

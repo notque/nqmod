@@ -39,7 +39,7 @@ local m_kMessages :table = {};
 function OnStatusMessage( str:string, fDisplayTime:number, type:number )
 
 -- TAG_FIX_WAR_MESSAGE_BLOCKING_SCREEN begin
-	if (type == 99 or type == ReportingStatusTypes.GOSSIP or type == ReportingStatusTypes.DEFAULT) then	-- A type we handle?
+	if (type == 99 or type == ReportingStatusTypes.DEFAULT) then	-- A type we handle?
 -- TAG_FIX_WAR_MESSAGE_BLOCKING_SCREEN old code
 --	if (type == ReportingStatusTypes.DEFAULT or
 --		type == ReportingStatusTypes.GOSSIP) then	-- A type we handle?

@@ -83,6 +83,7 @@ local pSpyInfo = GameInfo.Units["UNIT_SPY"];
 local m_AttackHotkeyId			= Input.GetActionId("Attack");
 local m_DeleteHotkeyId			= Input.GetActionId("DeleteUnit");
 
+local m_bUnitChanged			:boolean = false;
 -- ===========================================================================
 --	FUNCTIONS
 -- ===========================================================================
@@ -700,7 +701,11 @@ function View(data)
 
 	---=======[ ACTIONS ]=======---
 
-	HidePromotionPanel();
+	print("View: HidePanel");
+	if (m_bUnitChanged) then
+		HidePromotionPanel();
+		m_bUnitChanged = false;
+	end
 
 	-- Reset UnitPanelBaseContainer to minium size
 	Controls.UnitPanelBaseContainer:SetSizeX(m_minUnitPanelWidth);
@@ -1816,10 +1821,12 @@ end
 -- ===========================================================================
 function Hide()
 	ContextPtr:SetHide(true);
+	HidePromotionPanel();
 end
 
 -- ===========================================================================
 function HidePromotionPanel()
+	print("HidePanel");
 	Controls.PromotionPanel:SetHide(true);
 	Controls.VeteranNamePanel:SetHide(true);
 	LuaEvents.UnitPanel_HideUnitPromotion();
@@ -2124,6 +2131,7 @@ function OnUnitSelectionChanged(player, unitId, locationX, locationY, locationZ,
 		m_UnitId = unitId;
 		m_primaryColor, m_secondaryColor = UI.GetPlayerColors( m_selectedPlayerId );
 		m_combatResults = nil;
+		m_bUnitChanged = true;
 
 		Refresh(m_selectedPlayerId, m_UnitId)
 		Controls.UnitPanelAlpha:SetToBeginning();
@@ -3268,7 +3276,7 @@ end
 
 -- ===========================================================================
 function OnInterfaceModeChanged( eOldMode:number, eNewMode:number )
-
+	print("UnitPanel MC", eOldMode, eNewMode, playerID);
 	if (eNewMode == InterfaceModeTypes.CITY_RANGE_ATTACK) then
 		ContextPtr:SetHide(false);
 

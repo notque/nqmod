@@ -1366,6 +1366,17 @@ function OnNotificationAdded( playerID:number, notificationID:number )
 			if (kStr == "NOTIFICATION_DIPLOMACY_SESSION") then
 				SetNotificationTextAlert(notificationEntry, pNotification); --NotificationManager.Find(playerID, notificationEntry.m_IDs[ notificationEntry.m_Index ]));
 			end
+
+			local messageName:string = Locale.Lookup( pNotification:GetMessage() );	
+			local summary:string = Locale.Lookup(pNotification:GetSummary());
+			print(kStr);
+			if (kStr == "NOTIFICATION_WONDER_COMPLETED") then
+				LuaEvents.NotificationLogAddMessage(messageName .. ": " .. summary, 0, 101);
+			end
+			
+			if (kStr == "NOTIFICATION_DISCOVER_NATURAL_WONDER") then
+				LuaEvents.NotificationLogAddMessage(messageName .. ": " .. summary, 0, 102);
+			end
 		else
 			-- Sanity check
 			UI.DataError("Notification added Event but not found in manager. PlayerID - " .. tostring(playerID) .. " Notification ID - " .. tostring(notificationID));

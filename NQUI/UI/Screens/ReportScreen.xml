@@ -366,100 +366,13 @@
 					<Image		Size="parent,24" Offset="0,-2" Texture="Controls_GradientSmall" FlipY="1" Color="Tourism,150" />
 					<Label		ID="Tourism"												Style="ReportHeaderText"		String="[ICON_Tourism]0" Color="Tourism"  />
 				</Container>
-				<Box																						Offset="1,0"	Size="2,22"	Color="46,70,95,128" />
+				<Box																						Offset="1,0"	Size="2,22"	Color="46,70,95,128" />				
 			</Stack>
 			<Grid					Style="DividerGrid" Offset="-10,22" Size="parent,8" Color="47,63,76,255" />
 		</Container>
 	</Instance>
 
 
-
-	<!-- ADJACENCY BONUSES -->
-
-	<Instance					Name="AdjacencyBonusHeaderInstance">
-		<Grid						ID="Top"														Offset="0,-1"	Size="1003,60"			SliceCorner="16,16" SliceSize="1,1" SliceTextureSize="32,32" Texture="Controls_LineItem" Color="200,199,212,255"  >
-			<Stack	StackGrowth="Right" >
-				<Container																													Size="269,parent"	Color="46,70,95,255" />
-				<Container																										Size="100,parent">
-					<GridButton		ID="ProductionButton"  Size="100,26" Style="ButtonLightWeightSquareGrid" Anchor="C,T">
-						<Label							Anchor="C,C"						Style="ReportHeaderText"		String="LOC_HUD_REPORTS_HEADER_PRODUCTION" />
-					</GridButton>
-				</Container>
-				<Box																													Size="2,parent"	Color="46,70,95,255" />
-				<Container																										Size="100,parent">
-					<GridButton		ID="FoodButton"  Size="100,26" Style="ButtonLightWeightSquareGrid" Anchor="C,T">
-						<Label							Anchor="C,C"						Style="ReportHeaderText"		String="LOC_HUD_REPORTS_HEADER_FOOD" />
-					</GridButton>
-				</Container>
-				<Box																													Size="2,parent"	Color="46,70,95,255" />
-				<Container																										Size="100,parent">
-					<GridButton		ID="GoldButton"  Size="100,26" Style="ButtonLightWeightSquareGrid" Anchor="C,T">
-						<Label							Anchor="C,C"						Style="ReportHeaderText"		String="LOC_HUD_REPORTS_HEADER_GOLD" />
-					</GridButton>
-				</Container>
-				<Box																													Size="2,parent"	Color="46,70,95,255" />
-				<Container																										Size="100,parent">
-					<GridButton		ID="FaithButton"  Size="100,26" Style="ButtonLightWeightSquareGrid" Anchor="C,T">
-						<Label							Anchor="C,C"						Style="ReportHeaderText"		String="LOC_HUD_REPORTS_HEADER_FAITH" />
-					</GridButton>
-				</Container>
-				<Box																													Size="2,parent"	Color="46,70,95,255" />
-				<Container																										Size="100,parent">
-					<GridButton		ID="ScienceButton"  Size="100,26" Style="ButtonLightWeightSquareGrid" Anchor="C,T">
-						<Label							Anchor="C,C"						Style="ReportHeaderText"		String="LOC_HUD_REPORTS_HEADER_SCIENCE" />
-					</GridButton>
-				</Container>
-				<Box																													Size="2,parent"	Color="46,70,95,255" />
-				<Container																										Size="100,parent">
-					<GridButton		ID="CultureButton"  Size="100,26" Style="ButtonLightWeightSquareGrid" Anchor="C,T">
-						<Label							Anchor="C,C"						Style="ReportHeaderText"		String="LOC_HUD_REPORTS_HEADER_CULTURE" />
-					</GridButton>
-				</Container>
-				<Box																													Size="2,parent"	Color="46,70,95,255" />
-				<Container																										Size="100,parent">
-					<GridButton		ID="TourismButton"  Size="100,26" Style="ButtonLightWeightSquareGrid" Anchor="C,T">
-						<Label							Anchor="C,C"						Style="ReportHeaderText"		String="LOC_HUD_REPORTS_HEADER_TOURISM" />
-					</GridButton>
-				</Container>
-				<Box																						Offset="1,0"	Size="2,parent"	Color="46,70,95,128" />
-			</Stack>
-
-		<Stack					ID="LineItemStack"						Anchor="L,B"							Offset="8,30"		StackGrowth="Bottom" />
-		</Grid>
-	</Instance>
-
-	<Instance					Name="AdjacencyBonusInstance">
-		<Container			ID="Top"														Offset="0,0"	Size="1003,1" >
-			<Stack	StackGrowth="Right" >
-				<Box																													Size="2,parent"	Color="46,70,95,128" />
-				<Container																			Offset="1,0"	Size="232,parent">
-					<Label		ID="LineItemName"			Style="ReportRowStart"			String="District" Offset="36,0" />
-				</Container>
-				<Container																										Size="33,parent" />
-				<Container																										Size="100,20">
-					<Label		ID="Production"				Style="ReportValueText"			String="P"  Color="Production" />
-				</Container>
-				<Container																										Size="100,20">
-					<Label		ID="Food"							Style="ReportValueText"			String="F"	Color="Food" />
-				</Container>
-				<Container																										Size="100,20">
-					<Label		ID="Gold"							Style="ReportValueText"			String="G"	Color="Gold" />
-				</Container>
-				<Container																										Size="100,20">
-					<Label		ID="Faith"						Style="ReportValueText"			String="F"	Color="Faith" />
-				</Container>
-				<Container																										Size="100,20">
-					<Label		ID="Science"					Style="ReportValueText"			String="S"	Color="Science" />
-				</Container>
-					<Container																										Size="100,20">
-					<Label		ID="Culture"					Style="ReportValueText"			String="C"	Color="Culture" />
-				</Container>
-				<Container																										Size="100,20">
-					<Label		ID="Tourism"					Style="ReportValueText"			String=""	Color="Tourism" />
-				</Container>
-			</Stack>
-		</Container>
-		</Instance>
 	<!-- BUILDING EXPENSE -->
 
 	<Instance					Name="BuildingExpensesHeaderInstance">

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Mod id="3e1d5f93-84ea-476f-b951-61c43b224081" version="1">
   <Properties>
     <Name>No Quitters UI Changes</Name>
@@ -21,7 +21,6 @@
 	<File>UI/Panels/StatusMessagePanel.xml</File>
 	<File>UI/Panels/UnitPanel.lua</File>
 	<File>UI/Tooltips/PlotToolTip.lua</File>
-	<File>UI/ToolTipHelper.lua</File>
 	<File>UI/Popups/NaturalWonderPopup.lua</File> <!-- 		 by ouglaaa  -->
 	<File>UI/WorldInput.lua</File>
 	<File>UI/BetterTradeScreen_Text.xml</File>
@@ -37,14 +36,12 @@
 	<File>UI/Popups/GreatPeoplePopup.xml</File>
 	<File>Civilopedia/CivilopediaSupport.lua</File>
 	<File>UI/TopPanel.lua</File>
-  <File>UI/DiplomacyActionView.lua</File>
-	<File>UI/DiplomacyActionView.xml</File>
+	<File>UI/TopPanel.xml</File>
 	<File>UI/Panels/NewTurnPanel.xml</File>
 	<File>UI/Menus/InGameTopOptionsMenu.lua</File>
 	<File>UI/FrontEnd/MainMenu.lua</File>
-	<File>UI/FrontEnd/LoadScreen.lua</File>
-	<File>UI/FrontEnd/LoadScreen.xml</File>
 	<File>UI/InGame.lua</File>
+	<File>UI/InGame.xml</File>
 	<File>UI/Screens/ReportScreen.lua</File>
 	<File>UI/Panels/NotificationPanel.lua</File>
 	<File>UI/Panels/NotificationPanel.xml</File>
@@ -54,6 +51,8 @@
 	<File>UI/ProductionPanel.xml</File>
 	<File>UI/StrategicView_MapPlacement.lua</File>
 	<File>UI/SupportFunctions.lua</File>
+	<File>UI/TradeOverview.xml</File>
+	<File>UI/TradeOverview.lua</File>
 	<File>UI/Choosers/TradeRouteChooser.xml</File>
 	<File>UI/Choosers/TradeRouteChooser.lua</File>
 	<File>UI/Choosers/TradeOriginChooser.xml</File>
@@ -64,6 +63,14 @@
 	<File>UI/WorldView/CityBannerManager.xml</File>
 	<File>UI/WorldView/PlotInfo.xml</File>
 	<File>UI/WorldView/PlotInfo.lua</File>
+	<File>UI/HBUI_Script.lua</File>
+	<File>Text/UI_Text.xml</File>
+	<File>UI/PartialScreenHooks.xml</File>
+	<File>UI/PartialScreenHooks.lua</File>
+	<File>UI/PartialScreens/NotificationLog.lua</File>
+	<File>UI/PartialScreens/NotificationLog.xml</File>
+	<File>UI/Screens/DemosScreen.lua</File>
+	<File>UI/Screens/DemosScreen.xml</File>
   </Files>
 	<Settings>
 		<Custom id="HB_UI_SETTING">
@@ -74,10 +81,15 @@
 		</Custom>
 	</Settings>
 	<Components>
-		
-		<LocalizedText id="BTS_TEXT">
+		<GameplayScripts id="HB_UI_Scripts">
+			<Items>
+				<File>UI/HBUI_Script.lua</File>
+			</Items>
+		</GameplayScripts>
+		<LocalizedText id="HB_UI_TEXT">
 			<Items>
 				<File>Text/BTS_Text.xml</File>
+				<File>Text/UI_Text.sql</File>
 			</Items>
 		</LocalizedText>
 
@@ -90,7 +102,6 @@
 				<File>UI/Panels/StatusMessagePanel.xml</File>
 				<File>UI/Panels/UnitPanel.lua</File>
 				<File>UI/Tooltips/PlotToolTip.lua</File>
-	      <File>UI/ToolTipHelper.lua</File>
 				<File>UI/Popups/NaturalWonderPopup.lua</File> 
 				<File>UI/WorldInput.lua</File>
 				<File>UI/BetterTradeScreen_Text.xml</File>
@@ -105,15 +116,13 @@
 				<File>UI/Popups/GreatPeoplePopup.lua</File>
 				<File>Civilopedia/CivilopediaSupport.lua</File>
 				<File>UI/TopPanel.lua</File>
-				<File>UI/DiplomacyActionView.lua</File>
-				<File>UI/DiplomacyActionView.xml</File>
+				<File>UI/TopPanel.xml</File>
 				<File>UI/Panels/NewTurnPanel.xml</File>
 				<File>UI/Popups/GreatPeoplePopup.xml</File>
 				<File>UI/Menus/InGameTopOptionsMenu.lua</File>
 				<File>UI/FrontEnd/MainMenu.lua</File>
-	      <File>UI/FrontEnd/LoadScreen.lua</File>
-	      <File>UI/FrontEnd/LoadScreen.xml</File>
 				<File>UI/InGame.lua</File>
+				<File>UI/InGame.xml</File>
 				<File>UI/Screens/ReportScreen.lua</File>
 				<File>UI/Panels/NotificationPanel.lua</File>
 				<File>UI/Panels/NotificationPanel.xml</File>
@@ -123,6 +132,8 @@
 				<File>UI/ProductionPanel.xml</File>
 				<File>UI/StrategicView_MapPlacement.lua</File>
 				<File>UI/SupportFunctions.lua</File>
+				<File>UI/TradeOverview.xml</File>
+				<File>UI/TradeOverview.lua</File>
 				<File>UI/Choosers/TradeRouteChooser.xml</File>
 				<File>UI/Choosers/TradeRouteChooser.lua</File>
 				<File>UI/Choosers/TradeOriginChooser.xml</File>
@@ -132,6 +143,12 @@
 				<File>UI/WorldView/CityBannerManager.xml</File>
 				<File>UI/WorldView/PlotInfo.xml</File>
 				<File>UI/WorldView/PlotInfo.lua</File>
+				<File>UI/PartialScreenHooks.xml</File>
+				<File>UI/PartialScreenHooks.lua</File>
+				<File>UI/PartialScreens/NotificationLog.lua</File>
+				<File>UI/PartialScreens/NotificationLog.xml</File>
+				<File>UI/Screens/DemosScreen.lua</File>
+				<File>UI/Screens/DemosScreen.xml</File>
 			</Items>
 		</ImportFiles>
 	</Components>

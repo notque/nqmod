@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <!-- Top level context for InGame Civ6					-->
 <!-- Tabs set to 2 spaces, retaining the tab.		-->
@@ -32,11 +32,11 @@
 		<LuaContext	ID="PlotToolTip"							FileName="PlotToolTip"													/>
 		<LuaContext	ID="NotificationPanel"				FileName="NotificationPanel"										/>
 		<LuaContext ID="WorldTracker"	            FileName="WorldTracker"									        />
-		<LuaContext	ID="MinimapPanel"							FileName="MinimapPanel"													/>
+		<LuaContext	ID="MinimapPanel"							FileName="MinimapPanel"													/>	
 		<LuaContext	ID="CityPanel"								FileName="CityPanel"								Hidden="1"	/>
 		<LuaContext	ID="UnitPanel"								FileName="UnitPanel"								Hidden="1"	/>
     <LuaContext	ID="ActionPanel"							FileName="ActionPanel"													/>
-		<LuaContext	ID="MultiplayerTurnManager"		FileName="MultiplayerTurnManager"		Hidden="1"	/>
+		<LuaContext	ID="MultiplayerTurnManager"		FileName="MultiplayerTurnManager"		Hidden="1"	/>   
 	</Container>
 
 	<Container		ID="PartialScreens">
@@ -45,11 +45,12 @@
 		<LuaContext	ID="CityStatesPopup"					FileName="CityStates"								Hidden="1"	/>
 		<LuaContext ID="EspionageOverview"        FileName="EspionageOverview"        Hidden="1"  />
 		<LuaContext	ID="WorldRankings"						FileName="WorldRankings"						Hidden="1"  />
+		<LuaContext	ID="NotificationLog"						FileName="NotificationLog"						Hidden="1"  />
     <LuaContext	ID="TradeOverview"					  FileName="TradeOverview"						Hidden="1"	/>
     <LuaContext	ID="PartialScreenHooks"			  FileName="PartialScreenHooks"      />
 		<LuaContext	ID="ProductionPanel"					FileName="ProductionPanel"					Hidden="1"	/>
 	</Container>
-
+	  
   <Container		ID="Screens">
     <LuaContext	ID="TechTree"									FileName="TechTree"									Hidden="1"	/>
 		<LuaContext	ID="CivicsTree"								FileName="CivicsTree"								Hidden="1"	/>
@@ -59,6 +60,7 @@
     <LuaContext ID="GreatWorkShowcase"				FileName="GreatWorkShowcase"				Hidden="1"  />
 		<LuaContext ID="GreatPeoplePopup"         FileName="GreatPeoplePopup"         Hidden="1"  />
 		<LuaContext ID="ReportScreen"						  FileName="ReportScreen"							Hidden="1"  />
+		<LuaContext ID="DemosScreen"						  FileName="DemosScreen"							Hidden="1"  />
 	</Container>
 
 	<Container    ID="TopLevelHUD">
@@ -94,13 +96,13 @@
 
 	<Container		ID="EndGame">
 		<LuaContext	ID="EndGameMenu"							FileName="EndGameMenu"							Hidden="1"	/>
-	</Container>
-
+		<!--<LuaContext ID="EndDemo"									FileName="EndDemo"                  Hidden="1" />--> 
+  </Container>
+	
 	<Container		ID="Diplomacy">
 		<LuaContext ID="LeaderScene"              FileName="LeaderScene"              Hidden="1"  />
 		<LuaContext	ID="DiplomacyActionView"			FileName="DiplomacyActionView"			Hidden="1"	/>
 		<LuaContext	ID="DiplomacyDealView"			  FileName="DiplomacyDealView"			  Hidden="1"	/>
-		<LuaContext	ID="DiploPopup"							  FileName="DiploPopup"							  Hidden="1"	/>
 		<LuaContext ID="DeclareWarPopup"          FileName="DeclareWarPopup"          Hidden="1"  />
 	</Container>
 
@@ -108,12 +110,12 @@
 		<LuaContext	ID="PlayerChange"							FileName="PlayerChange"							Hidden="1"	/>
 		<LuaContext	ID="NewTurnPanel"							FileName="NewTurnPanel"							Hidden="0"	/>
 	</Container>
-
+	
 	<LuaContext		ID="Civilopedia"							FileName="CivilopediaScreen"				Hidden="1"	/>
-	<LuaContext		ID="PausePanel"								FileName="PausePanel"								Hidden="0"	/>
-
+	<LuaContext		ID="PausePanel"								FileName="PausePanel"								Hidden="0"	/>	
+	
 	<!-- Always very last/top: the in-game 'SHELL' menu. -->
-  <LuaContext		ID="TopOptionsBackground"			FileName="InGameTopOptionsBackground"			Hidden="1" />
-  <LuaContext		ID="TopOptionsMenu"						FileName="InGameTopOptionsMenu"			      Hidden="1"	TutorialActive="1" />
+  <LuaContext		ID="TopOptionsBackground"			FileName="InGameTopOptionsBackground"			Hidden="1" /> 
+  <LuaContext		ID="TopOptionsMenu"						FileName="InGameTopOptionsMenu"			      Hidden="1"	TutorialActive="1" />	
 
 </Context>
