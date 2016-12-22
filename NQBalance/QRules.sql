@@ -2,7 +2,7 @@
 -- General Changes
 -----------------------------------------------
 -- Scaling cost escalation for online speed.
- UPDATE GlobalParameters SET Value = 1000 WHERE Name = 'GAME_COST_ESCALATION'; -- Was 1000
+ --UPDATE GlobalParameters SET Value = 1000 WHERE Name = 'GAME_COST_ESCALATION'; -- Was 1000
  UPDATE GlobalParameters SET Value = .03 WHERE Name = 'COMBAT_POWER_SCALING'; -- Was .04
 -- set chopand harvest changes for online speed
 UPDATE Resource_Harvests SET Amount = round(Amount * 0.5, 0);
@@ -11,24 +11,27 @@ UPDATE Feature_Removes SET Yield = round(Yield * 0.5, 0);
  -----------------------------------------------
 -- War Weariness
 -----------------------------------------------
- 
+ -- Occupation Changes - Make growth half that of a normal city
+UPDATE GlobalParameters SET VALUE = '.5' WHERE Name = 'CITY_GROWTH_OCCUPATION_MULTIPLIER'; -- was 0.0
+
 -- War Weariness for Nukes Increase
-UPDATE GlobalParameters SET Value = '2000' WHERE Name = 'WAR_WEARINESS_PER_WMD_LAUNCHED'; -- was 10
+UPDATE GlobalParameters SET Value = '1000' WHERE Name = 'WAR_WEARINESS_PER_WMD_LAUNCHED'; -- was 10
 -- War Weariness removal per turn while at peace increase
-UPDATE GlobalParameters SET Value = '200' WHERE Name = 'WAR_WEARINESS_DECAY_TURN_AT_PEACE'; -- was 200
+--UPDATE GlobalParameters SET Value = '200' WHERE Name = 'WAR_WEARINESS_DECAY_TURN_AT_PEACE'; -- was 200
 -- War Weariness removal per turn while at war scaling
-UPDATE GlobalParameters SET Value = '50' WHERE Name = 'WAR_WEARINESS_DECAY_TURN_AT_WAR'; -- was 50
+--UPDATE GlobalParameters SET Value = '50' WHERE Name = 'WAR_WEARINESS_DECAY_TURN_AT_WAR'; -- was 50
 -- War Weariness removal @ peace increase
-UPDATE GlobalParameters SET Value = '2000' WHERE Name = 'WAR_WEARINESS_DECAY_PEACE_DECLARED'; -- was 2000
+--UPDATE GlobalParameters SET Value = '2000' WHERE Name = 'WAR_WEARINESS_DECAY_PEACE_DECLARED'; -- was 2000
 -- Remove base war weariness penalty for Defending in your lands, still loses for killing units
-UPDATE GlobalParameters SET Value = '1' WHERE Name = 'WAR_WEARINESS_PER_COMBAT_IN_ALLIED_LANDS'; -- was 1
+--UPDATE GlobalParameters SET Value = '1' WHERE Name = 'WAR_WEARINESS_PER_COMBAT_IN_ALLIED_LANDS'; -- was 1
 -- Remove Per Unit killed as it hurts the defender of the war
-UPDATE GlobalParameters SET Value = '3' WHERE Name = 'WAR_WEARINESS_PER_UNIT_KILLED'; -- was 3
-UPDATE GlobalParameters SET Value = '3' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_REQ_AMENITIES_AT_WAR_CITY'; -- was 3
-UPDATE GlobalParameters SET Value = '0' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_REQ_AMENITIES_FOUNDED_CITY'; -- was 0
-UPDATE GlobalParameters SET Value = '1' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_REQ_AMENITIES_NONFOUNDED_CITY'; -- was 1
-UPDATE GlobalParameters SET Value = '16' WHERE Name = 'WAR_WEARINESS_WARMONGER_BASE'; -- was 16
-UPDATE GlobalParameters SET Value = '400' WHERE Name = 'WAR_WEARINESS_POINTS_FOR_AMENITY_LOSS'; -- was 400
+--UPDATE GlobalParameters SET Value = '3' WHERE Name = 'WAR_WEARINESS_PER_UNIT_KILLED'; -- was 3
+--UPDATE GlobalParameters SET Value = '3' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_REQ_AMENITIES_AT_WAR_CITY'; -- was 3
+--UPDATE GlobalParameters SET Value = '0' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_REQ_AMENITIES_FOUNDED_CITY'; -- was 0
+--UPDATE GlobalParameters SET Value = '1' WHERE Name = 'WAR_WEARINESS_LOSS_OVER_REQ_AMENITIES_NONFOUNDED_CITY'; -- was 1
+--UPDATE GlobalParameters SET Value = '16' WHERE Name = 'WAR_WEARINESS_WARMONGER_BASE'; -- was 16
+-- Make war weariness half as painful
+UPDATE GlobalParameters SET Value = '800' WHERE Name = 'WAR_WEARINESS_POINTS_FOR_AMENITY_LOSS'; -- was 400
  
 -- Remove base war weariness penalty for Defending in your lands, still loses for killing units
 UPDATE GlobalParameters SET Value = '2' WHERE Name = 'WAR_WEARINESS_PER_COMBAT_IN_FOREIGN_LANDS'; -- was 2
@@ -36,9 +39,9 @@ UPDATE GlobalParameters SET Value = '2' WHERE Name = 'WAR_WEARINESS_PER_COMBAT_I
 -- Lower Rebellion cooldown
 UPDATE GlobalParameters SET Value = '10' WHERE Name = 'REBELLION_COOLDOWN_TURNS'; -- was 20
  
-UPDATE GlobalParameters SET Value = '5' WHERE Name = 'DIPLOMACY_WAR_MIN_TURNS'; -- was 10
-UPDATE GlobalParameters SET Value = '5' WHERE Name = 'DIPLOMACY_PEACE_MIN_TURNS'; -- was 10
-UPDATE GlobalParameters SET Value = '15' WHERE Name = 'DIPLOMACY_ALLIANCE_TIME_LIMIT'; -- was 30
+--UPDATE GlobalParameters SET Value = '10' WHERE Name = 'DIPLOMACY_WAR_MIN_TURNS'; -- was 10
+--UPDATE GlobalParameters SET Value = '10' WHERE Name = 'DIPLOMACY_PEACE_MIN_TURNS'; -- was 10
+--UPDATE GlobalParameters SET Value = '30' WHERE Name = 'DIPLOMACY_ALLIANCE_TIME_LIMIT'; -- was 30
  
 --UPDATE GlobalParameters SET Value = '15' WHERE Name = 'COMBAT_MAX_EXTRA_DAMAGE'; -- was 12
  
@@ -48,7 +51,7 @@ UPDATE GlobalParameters SET Value = '15' WHERE Name = 'DIPLOMACY_ALLIANCE_TIME_L
 --Border Expanding
 --UPDATE GlobalParameters SET Value = 5 WHERE Name = 'CULTURE_COST_FIRST_PLOT'; -- was 10
 --UPDATE GlobalParameters SET Value = 1.4 WHERE Name = 'CULTURE_COST_LATER_PLOT_EXPONENT'; -- Used to be 1.3
-UPDATE GlobalParameters SET Value = 3 WHERE Name = 'CULTURE_COST_LATER_PLOT_MULTIPLIER'; -- Used to be 6
+--UPDATE GlobalParameters SET Value = 3 WHERE Name = 'CULTURE_COST_LATER_PLOT_MULTIPLIER'; -- Used to be 6
 --UPDATE GlobalParameters SET Value = 4 WHERE Name = 'CITY_MIN_RANGE'; -- Used to be 3
  
 UPDATE Units SET CostProgressionParam1 = CostProgressionParam1*2 where UnitType = "UNIT_SETTLER";
@@ -64,7 +67,7 @@ UPDATE Units SET CostProgressionParam1 = CostProgressionParam1*2 where UnitType 
 UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'PROJECT_COMPLETION_GRANT_CULTURE_BASED_ON_SCIENCE_RATE' and Name = 'Multiplier' ; -- Was 10
  
  --Cities still hurt after being taken. Need to heal
-UPDATE GlobalParameters SET Value = 25 WHERE Name = 'CITY_CAPTURED_DAMAGE_PERCENTAGE'; -- Used to be 50
+UPDATE GlobalParameters SET Value = 75 WHERE Name = 'CITY_CAPTURED_DAMAGE_PERCENTAGE'; -- Used to be 50
  --Scaling turns of anarchy for choosing previous government
 UPDATE GlobalParameters SET Value = 1 WHERE Name = 'GOVERNMENT_BASE_ANARCHY_TURNS'; -- Used to be 2
  --Scaling Great work art lock time
@@ -78,20 +81,61 @@ UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'MINOR_CIV_SCIENTIFIC_
 UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'MINOR_CIV_RELIGIOUS_YIELD_FOR_HOLY_SITE' and Name = 'Amount';
 UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'MINOR_CIV_CULTURAL_YIELD_FOR_THEATER_DISTRICT' and Name = 'Amount';
 UPDATE ModifierArguments SET Value = 1 WHERE ModifierId = 'MINOR_CIV_INDUSTRIAL_BUILDING_PRODUCTION_FOR_INDUSTRIAL_ZONE' and Name = 'Amount';
- 
+
 -----------------------------------------------
--- Projects
+-- Unique Tile Improvements
 -----------------------------------------------
--- Double production cost, gives far too many GPs for value in Online Speed
---UPDATE Projects SET Cost = Cost*2;
+--Chateau Improvement, No longer Requires a river, 1 housing per. +1 Culture
+UPDATE Improvements SET TilesRequired='1', Housing='1', 
+                        RequiresRiver='0', SameAdjacentValid='0'
+WHERE ImprovementType ='IMPROVEMENT_CHATEAU';
+--UPDATE Improvement_YieldChanges SET YieldChange='2'
+--WHERE ImprovementType ='IMPROVEMENT_CHATEAU' and YieldType='YIELD_CULTURE';
+
+-- Ziggurat add some housing, and some culture
+UPDATE Improvements SET TilesRequired='2', Housing='1', SameAdjacentValid='0'
+WHERE ImprovementType ='IMPROVEMENT_ZIGGURAT';
+UPDATE Improvement_YieldChanges SET YieldChange='1'
+WHERE ImprovementType ='IMPROVEMENT_ZIGGURAT' and YieldType='YIELD_CULTURE';
+
+
+UPDATE Improvements SET TilesRequired='2', Housing='1', SameAdjacentValid='0'
+WHERE ImprovementType ='IMPROVEMENT_MISSION';
+--UPDATE Improvement_YieldChanges SET YieldChange='1'
+--WHERE ImprovementType ='IMPROVEMENT_MISSION' and YieldType='YIELD_SCIENCE';
+--UPDATE Improvement_YieldChanges SET YieldChange='2'
+--WHERE ImprovementType ='IMPROVEMENT_MISSION' and YieldType='YIELD_FAITH';
+--UPDATE Improvement_YieldChanges SET YieldChange='0'
+--WHERE ImprovementType ='IMPROVEMENT_MISSION' and YieldType='YIELD_GOLD';
+
+UPDATE Improvements SET SameAdjacentValid='0'
+WHERE ImprovementType ='IMPROVEMENT_KURGAN';
+UPDATE Improvement_YieldChanges SET YieldChange='2'
+WHERE ImprovementType ='IMPROVEMENT_KURGAN' and YieldType='YIELD_GOLD';
+UPDATE Improvement_YieldChanges SET YieldChange='1'
+WHERE ImprovementType ='IMPROVEMENT_KURGAN' and YieldType='YIELD_FAITH';
+UPDATE Improvement_YieldChanges SET YieldChange='1'
+WHERE ImprovementType ='IMPROVEMENT_KURGAN' and YieldType='YIELD_CULTURE';
+
+-- Great Wall, Add Gold
+UPDATE Improvement_YieldChanges SET YieldChange='2'
+WHERE ImprovementType ='IMPROVEMENT_GREATWALL' and YieldType='YIELD_GOLD';
+
+-- Add two gold to Quarries to make them more useful instead of just something to harvest.
+UPDATE Improvement_YieldChanges SET YieldChange='2'
+WHERE ImprovementType ='IMPROVEMENT_QUARRY' and YieldType='YIELD_GOLD';
+
+-- Collosal Head +4 Faith
+UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_COLOSSAL_HEAD';
+UPDATE Improvement_YieldChanges SET YieldChange='4'
+WHERE ImprovementType ='IMPROVEMENT_COLOSSAL_HEAD' and YieldType='YIELD_FAITH';
+
+UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_ROMAN_FORT';
+UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_AIRSTRIP';
+UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_FORT';
+--UPDATE Improvements SET SameAdjacentValid   ='0' WHERE ImprovementType ='IMPROVEMENT_BEACH_RESORT';
  
------------------------------------------------
--- Buildings
------------------------------------------------
--- Nerf Colosseum to +1 amenity
---UPDATE Buildings SET Entertainment = 1 WHERE BuildingType = 'BUILDING_COLOSSEUM';
- 
- 
+
 -----------------------------------------------
 -- Religion
 -----------------------------------------------
@@ -100,11 +144,31 @@ UPDATE GlobalParameters SET Value = 100 WHERE Name = 'RELIGION_SPREAD_ATHEISM_PR
 UPDATE GlobalParameters SET Value = 400 WHERE Name = 'RELIGION_SPREAD_HOLY_CITY_PRESSURE_PER_POP'; -- Was 200
 UPDATE GlobalParameters SET Value = 8 WHERE Name = 'RELIGION_SPREAD_HOLY_CITY_PRESSURE_MULTIPLIER'; -- Was 4
 UPDATE GlobalParameters SET Value = 4 WHERE Name = 'RELIGION_SPREAD_HOLY_SITE_PRESSURE_MULTIPLIER'; -- Was 2
+
+-- Add Religious Spread to third tier buildings
+INSERT INTO BuildingModifiers (BuildingType, ModifierId)
+VALUES  ('BUILDING_CATHEDRAL', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_GURDWARA', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_MEETING_HOUSE', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_MOSQUE', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_PAGODA', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_SYNAGOGUE', 'RELIGION_BUILDING_SPREAD'),
+        ('BUILDING_WAT', 'RELIGION_BUILDING_SPREAD');
+
+
+--MODIFIER_PLAYER_RELIGION_ADJUST_RELIGIOUS_SPREAD_STRENGTH
+INSERT INTO Modifiers (ModifierId, ModifierType)
+VALUES ('RELIGION_BUILDING_SPREAD', 'MODIFIER_PLAYER_RELIGION_ADJUST_RELIGIOUS_SPREAD_STRENGTH');
+
+INSERT INTO ModifierArguments (ModifierId, Name, Value) 
+VALUES ('RELIGION_BUILDING_SPREAD','SpreadMultiplier','10');
+
+
 -- No losing pressure for military units capturing religious units - Can this go negative and give you pressure?
-UPDATE GlobalParameters SET Value = 0 WHERE Name = 'RELIGION_SPREAD_UNIT_CAPTURE'; -- Was 125
+--UPDATE GlobalParameters SET Value = -125 WHERE Name = 'RELIGION_SPREAD_UNIT_CAPTURE'; -- Was 125
 
  -- Religious Buildings give 1 amenity each
-UPDATE Buildings SET Entertainment = 1 Where PurchaseYield = 'YIELD_FAITH';
+--UPDATE Buildings SET Entertainment = 1 Where PurchaseYield = 'YIELD_FAITH';
 
 -- Make Religious Units able to move better.
 --UPDATE GlobalParameters SET Value=3 WHERE Name='PLOT_UNIT_LIMIT';
@@ -115,15 +179,15 @@ UPDATE Buildings SET Entertainment = 1 Where PurchaseYield = 'YIELD_FAITH';
 -- Tourism
 -----------------------------------------------
 --Scaling for online speed.
-UPDATE GlobalParameters SET Value = 150 WHERE Name = 'TOURISM_TOURISM_TO_MOVE_CITIZEN'; -- Was 150
-UPDATE GlobalParameters SET Value = 100 WHERE Name = 'TOURISM_CULTURE_PER_CITIZEN'; -- Was 100
-UPDATE GlobalParameters SET Value = 4 WHERE Name = 'TOURISM_BASE_FROM_WONDER'; -- Was 2
+--UPDATE GlobalParameters SET Value = 150 WHERE Name = 'TOURISM_TOURISM_TO_MOVE_CITIZEN'; -- Was 150
+--UPDATE GlobalParameters SET Value = 100 WHERE Name = 'TOURISM_CULTURE_PER_CITIZEN'; -- Was 100
+--UPDATE GlobalParameters SET Value = 2 WHERE Name = 'TOURISM_BASE_FROM_WONDER'; -- Was 2
  
 -----------------------------------------------
 -- Trade Routes
 -----------------------------------------------
 -- Scaling for online speed.
-UPDATE GlobalParameters SET Value = 10 WHERE Name = 'TRADE_ROUTE_TURN_DURATION_BASE'; -- Was 20
+--UPDATE GlobalParameters SET Value = 20 WHERE Name = 'TRADE_ROUTE_TURN_DURATION_BASE'; -- Was 20
  
 -----------------------------------------------
 -- Spys
@@ -135,7 +199,7 @@ UPDATE GlobalParameters SET Value = 10 WHERE Name = 'TRADE_ROUTE_TURN_DURATION_B
 -- Growth
 -----------------------------------------------
 -- Scaling for online speed. -- Still testing
-UPDATE GlobalParameters SET Value = 4 WHERE Name = 'CITY_GROWTH_MULTIPLIER'; -- Was 8
+--UPDATE GlobalParameters SET Value = 8 WHERE Name = 'CITY_GROWTH_MULTIPLIER'; -- Was 8
  
 -----------------------------------------------
 -- Units
@@ -258,7 +322,7 @@ INSERT INTO Feature_AdjacentYields (FeatureType, YieldType, YieldChange) VALUES 
  
 -- Make fishing boats suck less by adding 1 extra Gold
  
-UPDATE Improvement_YieldChanges SET YieldChange='1' WHERE ImprovementType='IMPROVEMENT_FISHING_BOATS' AND YieldType='YIELD_GOLD' ;
+--UPDATE Improvement_YieldChanges SET YieldChange='1' WHERE ImprovementType='IMPROVEMENT_FISHING_BOATS' AND YieldType='YIELD_GOLD' ;
  
  
  
